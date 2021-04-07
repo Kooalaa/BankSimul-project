@@ -20,5 +20,4 @@ router.put('/:account_id', (req, res) => {
     );
 });
 
-
 module.exports = router;

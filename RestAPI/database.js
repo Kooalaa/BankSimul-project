@@ -5,4 +5,3 @@ module.exports.connection = mysql.createPool({
     password: 'netuser',
     database: 'BankSimulDB'
 });
-//module.exports = connection;
