@@ -1,8 +1,8 @@
-import mysql from 'mysql';
-const connection = mysql.createPool({
+const mysql = require('mysql');
+module.exports.connection = mysql.createPool({
     host: 'localhost',
-    user: 'project',
-    password: 'project',
+    user: 'netuser',
+    password: 'netuser',
     database: 'BankSimulDB'
 });
-module.exports = connection;
+//module.exports = connection;
