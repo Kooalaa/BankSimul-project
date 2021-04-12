@@ -4,10 +4,15 @@
 #include "DLLPincode_global.h"
 #include "dialog.h"
 
-class DLLPINCODE_EXPORT DLLPincode
-{
+class DLLPINCODE_EXPORT DLLPincode {
 public:
     DLLPincode();
+    ~DLLPincode();
+    void Main();
+    QByteArray PIN;
+
+private:
+    Dialog *pdialog;
 };
 
-#endif // DLLPINCODE_H
+#endif  // DLLPINCODE_H
