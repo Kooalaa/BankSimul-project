@@ -9,7 +9,7 @@
 class DLLRESTAPI_EXPORT dll_rest_api {
 public:
     dll_rest_api();
-    void login(int pin, int card_num);
+    void login(QByteArray hash, int card_num);
 
 private:
     engine_class *p_engine;
