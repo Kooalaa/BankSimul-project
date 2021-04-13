@@ -10,15 +10,36 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    main_window.cpp \
+    nosta.cpp \
+    saldo.cpp \
+    selaa.cpp \
+    start_window.cpp \
+    talleta.cpp
 
 HEADERS += \
-    mainwindow.h
+    main_window.h \
+    nosta.h \
+    saldo.h \
+    selaa.h \
+    start_window.h \
+    talleta.h
 
 FORMS += \
-    mainwindow.ui
+    main_window.ui \
+    nosta.ui \
+    saldo.ui \
+    selaa.ui \
+    start_window.ui \
+    talleta.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build-DLLPincode-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/release/ -lDLLPincode
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build-DLLPincode-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/ -lDLLPincode
+
+INCLUDEPATH += $$PWD/../DLLPincode
+DEPENDPATH += $$PWD/../DLLPincode
