@@ -38,8 +38,10 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build-DLLPincode-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/release/ -lDLLPincode
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build-DLLPincode-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/ -lDLLPincode
+
+
+
+win32: LIBS += -L$$PWD/../build-DLLPincode-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/ -lDLLPincode
 
 INCLUDEPATH += $$PWD/../DLLPincode
 DEPENDPATH += $$PWD/../DLLPincode
