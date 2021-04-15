@@ -39,6 +39,7 @@ void Dialog::Timer_slot() {
 }
 
 void Dialog::on_OK_clicked() {
+    p_timer->stop();
     string_PIN = ui->lineEdit->text();
     QByteArray joku_PIN(string_PIN.toLocal8Bit());
     byte_PIN = QCryptographicHash::hash(joku_PIN, QCryptographicHash::Sha3_256);
