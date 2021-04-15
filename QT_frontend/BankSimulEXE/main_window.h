@@ -3,10 +3,10 @@
 
 #include <QDialog>
 
-#include "nosta.h"
-#include "saldo.h"
-#include "selaa.h"
-#include "talleta.h"
+#include "balance.h"
+#include "browse_transactions.h"
+#include "deposit.h"
+#include "withdraw.h"
 
 namespace Ui {
 class Main_window;
@@ -33,10 +33,10 @@ private slots:
 
 private:
     Ui::Main_window *ui;
-    Nosta *pnosta;
-    Selaa *pselaa;
-    Saldo *psaldo;
-    Talleta *ptalleta;
+    withdraw *p_withdraw;
+    browse_transactions *pselaa;
+    balance *psaldo;
+    deposit *ptalleta;
 };
 
 #endif  // MAIN_WINDOW_H

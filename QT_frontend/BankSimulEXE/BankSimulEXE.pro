@@ -9,29 +9,29 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    balance.cpp \
+    browse_transactions.cpp \
+    deposit.cpp \
     main.cpp \
     main_window.cpp \
-    nosta.cpp \
-    saldo.cpp \
-    selaa.cpp \
     start_window.cpp \
-    talleta.cpp
+    withdraw.cpp
 
 HEADERS += \
+    balance.h \
+    browse_transactions.h \
+    deposit.h \
     main_window.h \
-    nosta.h \
-    saldo.h \
-    selaa.h \
     start_window.h \
-    talleta.h
+    withdraw.h
 
 FORMS += \
+    balance.ui \
+    browse_transactions.ui \
+    deposit.ui \
     main_window.ui \
-    nosta.ui \
-    saldo.ui \
-    selaa.ui \
     start_window.ui \
-    talleta.ui
+    withdraw.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
