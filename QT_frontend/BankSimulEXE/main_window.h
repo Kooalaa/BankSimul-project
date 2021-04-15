@@ -21,15 +21,15 @@ public:
 
 private slots:
 
-    void on_Selaa_tilitapahtumia_clicked();
+    void on_Browse_transactions_btn_clicked();
 
-    void on_Talleta_rahaa_clicked();
+    void on_Deposit_btn_clicked();
 
-    void on_Nosta_rahaa_clicked();
+    void on_Show_balance_btn_clicked();
 
-    void on_Nayta_saldo_clicked();
+    void on_Withdraw_btn_clicked();
 
-    void on_Kirjaudu_ulos_clicked();
+    void on_Log_out_btn_clicked();
 
 private:
     Ui::Main_window *ui;
