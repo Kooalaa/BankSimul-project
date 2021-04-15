@@ -15,35 +15,35 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="1" column="1">
-    <widget class="QPushButton" name="Nosta_rahaa">
+    <widget class="QPushButton" name="Withdraw_btn">
      <property name="text">
       <string>Nosta rahaa</string>
      </property>
     </widget>
    </item>
    <item row="0" column="0">
-    <widget class="QPushButton" name="Selaa_tilitapahtumia">
+    <widget class="QPushButton" name="Browse_transactions_btn">
      <property name="text">
       <string>Selaa tilitapahtumia</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QPushButton" name="Talleta_rahaa">
+    <widget class="QPushButton" name="Deposit_btn">
      <property name="text">
       <string>Talleta rahaa</string>
      </property>
     </widget>
    </item>
    <item row="1" column="0">
-    <widget class="QPushButton" name="Nayta_saldo">
+    <widget class="QPushButton" name="Show_balance_btn">
      <property name="text">
       <string>Näytä saldo</string>
      </property>
     </widget>
    </item>
    <item row="2" column="0">
-    <widget class="QPushButton" name="Kirjaudu_ulos">
+    <widget class="QPushButton" name="Log_out_btn">
      <property name="text">
       <string>Kirjaudu ulos</string>
      </property>
