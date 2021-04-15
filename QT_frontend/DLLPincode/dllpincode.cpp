@@ -12,3 +12,9 @@ void DLLPincode::Main() {
     pdialog->exec();
     PIN = pdialog->store_PIN();
 }
+
+void DLLPincode::Wrong_PIN(int attempts) {}
+
+void DLLPincode::Locked_card() {}
+
+void DLLPincode::Logged_in() {}
