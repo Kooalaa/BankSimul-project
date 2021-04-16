@@ -31,6 +31,9 @@ void dll_rest_api::get_card_status(int card_num) { p_engine->card_status(card_nu
 void dll_rest_api::get_transactions(int account_id, int index) {
     p_engine->transactions(account_id, index);
 }
+void dll_rest_api::add_transaction(int account_id, int sum) {
+    p_engine->add_transaction(account_id, sum);
+}
 
 void dll_rest_api::read_result(int status, int attempts, ids_t ids) {
     switch (status) {

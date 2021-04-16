@@ -12,6 +12,13 @@ struct ids_t {
     int account_id;
     int card_id;
 
+    ids_t() {}
+    ids_t(int init) {
+        customer_id = init;
+        account_id = init;
+        card_id = init;
+    }
+
     void operator=(int init) {
         customer_id = init;
         account_id = init;
@@ -43,6 +50,8 @@ private:
     QNetworkAccessManager *p_manager;
     QJsonObject get_json_object(QNetworkReply &reply);
     QJsonArray get_json_array(QNetworkReply &reply);
+    QObject *context;
+    const QString site_base_url = "http://192.168.1.2:8080";
 
 signals:
     void result_ready(int status, int attempts, ids_t ids);
@@ -52,11 +61,11 @@ signals:
     void result_ready(QVector<transaction_t> transactions);
 
 private slots:
-    void login_response(QNetworkReply *reply);
-    void customer_response(QNetworkReply *reply);
-    void account_response(QNetworkReply *reply);
-    void card_response(QNetworkReply *reply);
-    void transactions_response(QNetworkReply *reply);
+    void login_response();
+    void customer_response();
+    void account_response();
+    void card_response();
+    void transactions_response();
 };
 
 #endif  // ENGINE_CLASS_H

@@ -28,6 +28,7 @@ public:
     void get_account_info(int account_id);
     void get_card_status(int card_num);
     void get_transactions(int account_id, int index);
+    void add_transaction(int account_id, int sum);
 
 private:
     engine_class *p_engine;
