@@ -19,23 +19,22 @@ public:
     explicit Dialog(QWidget *parent = nullptr);
     ~Dialog();
     Ui::Dialog *ui;
-    QByteArray store_PIN();
-    QTimer *p_timer;
-    void timer();
-
-public slots:
-    void Timer_slot();
+signals:
+    void send_pin(QByteArray);
 
 private slots:
     void on_OK_clicked();
     void Handle_Buttons(QAbstractButton *button);
     void on_Close_clicked();
     void on_Backspace_clicked();
+    void Timer_slot();
 
 private:
-    QString string_PIN;
-    QByteArray byte_PIN;
+    QString PIN;
+    QByteArray hash;
     int time = 10;
+    QTimer *p_timer;
+    void timer();
 };
 
 #endif  // DIALOG_H

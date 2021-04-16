@@ -22,8 +22,6 @@ Dialog::~Dialog() {
     p_timer = nullptr;
 }
 
-QByteArray Dialog::store_PIN() { return byte_PIN; }
-
 void Dialog::timer() {
     p_timer = new QTimer();
     p_timer->start(1000);
@@ -40,10 +38,10 @@ void Dialog::Timer_slot() {
 
 void Dialog::on_OK_clicked() {
     p_timer->stop();
-    string_PIN = ui->lineEdit->text();
-    QByteArray joku_PIN(string_PIN.toLocal8Bit());
-    byte_PIN = QCryptographicHash::hash(joku_PIN, QCryptographicHash::Sha3_256);
-    this->close();
+    PIN = ui->lineEdit->text();
+    QByteArray temp(PIN.toLocal8Bit());
+    hash = QCryptographicHash::hash(temp, QCryptographicHash::Sha3_256);
+    emit send_pin(hash);
 }
 
 void Dialog::Handle_Buttons(QAbstractButton *button) {
