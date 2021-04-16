@@ -12,7 +12,7 @@ router.get('/:account_id', (req, res) => {
 });
 
 router.put('/:account_id', (req, res) => {
-    model.edit_saldo(req.params.account_id, req.body.new_saldo,
+    model.edit_saldo(req.params.account_id, req.body.new_balance,
         (err, db_result) => {
             if (err) res.json(err);
             else res.json(db_result);
