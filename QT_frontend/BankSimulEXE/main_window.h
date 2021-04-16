@@ -3,10 +3,10 @@
 
 #include <QDialog>
 
-#include "nosta.h"
-#include "saldo.h"
-#include "selaa.h"
-#include "talleta.h"
+#include "balance.h"
+#include "browse_transactions.h"
+#include "deposit.h"
+#include "withdraw.h"
 
 namespace Ui {
 class Main_window;
@@ -21,22 +21,22 @@ public:
 
 private slots:
 
-    void on_Selaa_tilitapahtumia_clicked();
+    void on_Browse_transactions_btn_clicked();
 
-    void on_Talleta_rahaa_clicked();
+    void on_Deposit_btn_clicked();
 
-    void on_Nosta_rahaa_clicked();
+    void on_Show_balance_btn_clicked();
 
-    void on_Nayta_saldo_clicked();
+    void on_Withdraw_btn_clicked();
 
-    void on_Kirjaudu_ulos_clicked();
+    void on_Log_out_btn_clicked();
 
 private:
     Ui::Main_window *ui;
-    Nosta *pnosta;
-    Selaa *pselaa;
-    Saldo *psaldo;
-    Talleta *ptalleta;
+    withdraw *p_withdraw;
+    browse_transactions *pselaa;
+    balance *psaldo;
+    deposit *ptalleta;
 };
 
 #endif  // MAIN_WINDOW_H

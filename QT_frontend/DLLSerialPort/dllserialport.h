@@ -13,6 +13,7 @@ public:
     DLLSerialPort(QObject *parent = nullptr);
     ~DLLSerialPort();
     void read_card();
+    void readPortInfo();
 
 private:
     Engine *engine;

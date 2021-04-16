@@ -9,22 +9,22 @@
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class Start_window;
+class start_window;
 }
 QT_END_NAMESPACE
 
-class Start_window : public QMainWindow {
+class start_window : public QMainWindow {
     Q_OBJECT
 
 public:
-    Start_window(QWidget *parent = nullptr);
-    ~Start_window();
+    start_window(QWidget *parent = nullptr);
+    ~start_window();
 
 private slots:
     void on_pushButton_clicked();
 
 private:
-    Ui::Start_window *ui;
+    Ui::start_window *ui;
     DLLPincode *ppincode;
     Main_window *pmain_window;
 };
