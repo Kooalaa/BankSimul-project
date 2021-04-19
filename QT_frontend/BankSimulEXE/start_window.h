@@ -1,10 +1,12 @@
 #ifndef START_WINDOW_H
 #define START_WINDOW_H
 
+#include <dll_rest_api.h>
+#include <dllpincode.h>
+
 #include <QDebug>
 #include <QMainWindow>
 
-#include "dllpincode.h"
 #include "main_window.h"
 
 QT_BEGIN_NAMESPACE
@@ -22,11 +24,14 @@ public:
 signals:
     void insert_card();
 private slots:
+    void logged_in(ids_t ids);
+    void pin_recived(QByteArray hash);
     void card_inserted();
 
 private:
     Ui::start_window *ui;
-    DLLPincode *ppincode;
-    Main_window *pmain_window;
+    DLLPincode *p_pincode;
+    Main_window *p_main_window;
+    dll_rest_api *p_rest;
 };
 #endif  // START_WINDOW_H
