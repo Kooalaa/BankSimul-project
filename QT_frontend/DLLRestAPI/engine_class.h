@@ -45,6 +45,7 @@ public:
     void transactions(int account_id, int index);
     void add_transaction(int account_id, double sum);
     void edit_balance(int account_id, double new_balance);
+    void transaction_amount(int account_id);
 
 private:
     QNetworkAccessManager *p_manager;
@@ -59,6 +60,7 @@ signals:
     void result_ready(QString account_num, double balance);
     void result_ready(bool locked, int attempts);
     void result_ready(QVector<transaction_t> transactions);
+    void result_ready(int amount);
 
 private slots:
     void login_response();

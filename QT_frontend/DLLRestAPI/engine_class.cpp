@@ -1,7 +1,10 @@
 
 #include "engine_class.h"
 
-engine_class::engine_class() { p_manager = new QNetworkAccessManager(this); }
+engine_class::engine_class() {
+    p_manager = new QNetworkAccessManager(this);
+    transaction_amount(1);
+}
 
 engine_class::~engine_class() {
     delete p_manager;
@@ -111,6 +114,25 @@ void engine_class::edit_balance(int account_id, double new_balance) {
         QJsonObject json_obj = get_json_object(*reply);
         int changed_rows = json_obj["changedRows"].toInt();
         qDebug() << changed_rows;
+        reply->deleteLater();
+    });
+}
+
+// Gets the ammount of trans actions on the account.
+void engine_class::transaction_amount(int account_id) {
+    QString site_url = site_base_url + "/actions/" + QString().setNum(account_id);
+
+    QNetworkRequest request(site_url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QNetworkReply *reply = p_manager->get(request);
+
+    connect(reply, &QNetworkReply::finished, this, [this]() {
+        QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
+        QJsonObject json_obj = get_json_object(*reply);
+
+        int ret_amount = json_obj["amount"].toInt();
+        emit result_ready(ret_amount);
         reply->deleteLater();
     });
 }
