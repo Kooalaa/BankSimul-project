@@ -17,6 +17,9 @@ dll_rest_api::dll_rest_api(QObject *parent) : QObject(parent) {
 
     connect(p_engine, qOverload<QVector<transaction_t>>(&engine_class::result_ready), this,
             qOverload<QVector<transaction_t>>(&dll_rest_api::read_result));
+
+    connect(p_engine, qOverload<int>(&engine_class::result_ready), this,
+            qOverload<int>(&dll_rest_api::read_result));
 }
 
 dll_rest_api::~dll_rest_api() {
@@ -33,6 +36,9 @@ void dll_rest_api::get_transactions(int account_id, int index) {
 }
 void dll_rest_api::add_transaction(int account_id, int sum) {
     p_engine->add_transaction(account_id, sum);
+}
+void dll_rest_api::get_transactions_pages(int account_id) {
+    p_engine->transaction_amount(account_id);
 }
 
 void dll_rest_api::read_result(int status, int attempts, ids_t ids) {
@@ -72,4 +78,9 @@ void dll_rest_api::read_result(bool locked, int attempts) { emit status_ready(lo
 void dll_rest_api::read_result(QVector<transaction_t> transactions) {
     this->transactions = transactions;
     emit info_ready(transactions);
+}
+
+void dll_rest_api::read_result(int amount) {
+    pages = amount / 10 + ((amount % 10) == 0 ? 0 : 1);
+    emit transactions_pages(pages);
 }
