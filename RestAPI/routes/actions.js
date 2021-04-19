@@ -21,4 +21,13 @@ router.post('/', (req, res) => {
     );
 });
 
+router.get('/:account_id', (req, res) => {
+    model.get_actions_amount(req.params.account_id,
+        (err, db_result) => {
+            if (err) res.json(err);
+            else res.json(db_result[0]);
+        }
+    );
+});
+
 module.exports = router;
