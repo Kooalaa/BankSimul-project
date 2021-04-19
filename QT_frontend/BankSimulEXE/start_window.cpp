@@ -6,6 +6,7 @@ start_window::start_window(QWidget *parent) : QMainWindow(parent), ui(new Ui::st
     ui->setupUi(this);
     ppincode = new DLLPincode();
     pmain_window = new Main_window();
+    pmain_window->show();
 }
 
 start_window::~start_window() {
@@ -16,9 +17,7 @@ start_window::~start_window() {
     pmain_window = nullptr;
 }
 
-void start_window::on_pushButton_clicked() {
+void start_window::card_inserted() {  // Showing the DLLPincode ui when card is inserted
     ppincode->Main();
-    this->hide();
-    qDebug() << QString(ppincode->PIN.toHex());
     pmain_window->show();
 }
