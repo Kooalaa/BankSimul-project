@@ -15,5 +15,13 @@ module.exports.model = {
             [account_id, sum],
             callback
         );
+    },
+
+    get_actions_amount: (account_id, callback) => {
+        db.query(
+            'select count(id) as amount from Tili_tapahtumat where Tili_id=?',
+            [account_id],
+            callback
+        );
     }
 }
