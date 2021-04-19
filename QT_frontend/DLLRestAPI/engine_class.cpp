@@ -1,10 +1,7 @@
 
 #include "engine_class.h"
 
-engine_class::engine_class() {
-    p_manager = new QNetworkAccessManager(this);
-    transaction_amount(1);
-}
+engine_class::engine_class() { p_manager = new QNetworkAccessManager(this); }
 
 engine_class::~engine_class() {
     delete p_manager;
