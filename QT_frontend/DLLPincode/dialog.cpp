@@ -5,12 +5,12 @@
 #include "ui_dialog.h"
 
 Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog) {
-    timer();  // Calling timersetup as soon as possible
     ui->setupUi(this);
+    p_timer = new QTimer();
     // clang-format off
     connect(ui->Key_pad, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(Handle_Buttons(QAbstractButton*)));
     // clang-format on
-    this->show();
+    connect(p_timer, SIGNAL(timeout()), this, SLOT(Timer_slot()), Qt::DirectConnection);
     ui->lineEdit->setMaxLength(4);
     ui->lineEdit->setEchoMode(QLineEdit::Password);
 }
@@ -22,10 +22,9 @@ Dialog::~Dialog() {
     p_timer = nullptr;
 }
 
-void Dialog::timer() {  // Timer setup and start(ms)
-    p_timer = new QTimer();
+void Dialog::show_with_timer() {
     p_timer->start(1000);
-    connect(p_timer, SIGNAL(timeout()), this, SLOT(Timer_slot()), Qt::DirectConnection);
+    this->show();
 }
 
 void Dialog::Timer_slot() {  // Updating the time to ui.label every second

@@ -35,8 +35,9 @@ void Main_window::on_Browse_transactions_btn_clicked() {}
 void Main_window::on_Deposit_btn_clicked() {}
 
 void Main_window::on_Show_balance_btn_clicked() {
-    p_balance->init_and_show(p_ids, this);
-    this->hide();
+    // p_balance->init_and_show(p_ids, this);
+    qDebug() << this->height() << "x" << this->width();
+    // this->hide();
 }
 
 void Main_window::on_Withdraw_btn_clicked() {}
