@@ -19,9 +19,10 @@ class start_window : public QMainWindow {
 public:
     start_window(QWidget *parent = nullptr);
     ~start_window();
-
+signals:
+    void insert_card();
 private slots:
-    void on_pushButton_clicked();
+    void card_inserted();
 
 private:
     Ui::start_window *ui;
