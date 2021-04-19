@@ -41,4 +41,4 @@ void Main_window::on_Show_balance_btn_clicked() {
 
 void Main_window::on_Withdraw_btn_clicked() {}
 
-void Main_window::on_Log_out_btn_clicked() {}
+void Main_window::on_Log_out_btn_clicked() { this->close(); }

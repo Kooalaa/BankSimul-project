@@ -1,10 +1,10 @@
 const { connection: db } = require('../database');
 
 module.exports.model = {
-    get_info: (card_id, callback) => {
+    get_info: (card_num, callback) => {
         db.query(
-            'select * from Kortti where id=?',
-            [card_id],
+            'select Lukossa, Väärä_pin from Kortti where Kortinnumero=?',
+            [card_num],
             callback
         );
     }

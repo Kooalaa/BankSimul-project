@@ -14,10 +14,12 @@ public:
     explicit Error_dialog(QWidget *parent = nullptr);
     ~Error_dialog();
 public slots:
-    void show_error();
+    void show_error(int attempts);
+    void show_locked_card();
 
 private:
     Ui::Error_dialog *ui;
+    QString error;
 };
 
 #endif  // ERROR_DIALOG_H
