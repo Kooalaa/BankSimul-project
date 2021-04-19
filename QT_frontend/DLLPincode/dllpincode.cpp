@@ -12,7 +12,7 @@ DLLPincode::~DLLPincode() {
     pdialog = nullptr;
 }
 
-void DLLPincode::Main() { pdialog->show(); }
+void DLLPincode::Main() { pdialog->show_with_timer(); }
 
 void DLLPincode::Wrong_PIN(int attempts) { perror_dialog->show_error(attempts); }
 

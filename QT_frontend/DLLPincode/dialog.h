@@ -19,6 +19,7 @@ public:
     explicit Dialog(QWidget *parent = nullptr);
     ~Dialog();
     Ui::Dialog *ui;
+    void show_with_timer();
 signals:
     void send_pin(QByteArray);
 
