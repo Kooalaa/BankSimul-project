@@ -7,6 +7,7 @@
 #include <QVector>
 #include <QtNetwork>
 
+// Struct to package ids for easier transportasion over functions
 struct ids_t {
     int customer_id;
     int account_id;
@@ -26,6 +27,7 @@ struct ids_t {
     }
 };
 
+// Struct to package transactions data for easier transportasion over functions
 struct transaction_t {
     double sum;
     QString date;
@@ -51,7 +53,6 @@ private:
     QNetworkAccessManager *p_manager;
     QJsonObject get_json_object(QNetworkReply &reply);
     QJsonArray get_json_array(QNetworkReply &reply);
-    QObject *context;
     const QString site_base_url = "http://192.168.1.2:8080";
 
 signals:
