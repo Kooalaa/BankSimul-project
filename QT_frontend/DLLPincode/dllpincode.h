@@ -12,7 +12,7 @@ class DLLPINCODE_EXPORT DLLPincode : public QObject {
 public:
     DLLPincode(QObject *parent = nullptr);
     ~DLLPincode();
-    void Main();
+    void Main(bool);
 
 signals:
     void send_pin(QByteArray);
@@ -24,8 +24,8 @@ public slots:
     void get_pin(QByteArray);
 
 private:
-    Dialog *pdialog;
-    Error_dialog *perror_dialog;
+    Dialog *p_dialog;
+    Error_dialog *p_error_dialog;
 };
 
 #endif  // DLLPINCODE_H

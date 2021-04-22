@@ -1,23 +1,36 @@
 #include "dllpincode.h"
 
 DLLPincode::DLLPincode(QObject *parent) : QObject(parent) {
-    perror_dialog = new Error_dialog();
-    pdialog = new Dialog();
-    connect(pdialog, SIGNAL(send_pin(QByteArray)), this, SLOT(get_pin(QByteArray)));
+    p_error_dialog = new Error_dialog();
+    p_dialog = new Dialog();
+    connect(p_dialog, SIGNAL(send_pin(QByteArray)), this, SLOT(get_pin(QByteArray)));
 }
 
+// Deleting pointers and making them nullpointers
 DLLPincode::~DLLPincode() {
-    delete pdialog;
-
-    pdialog = nullptr;
+    delete p_dialog;
+    p_dialog = nullptr;
+    delete p_error_dialog;
+    p_error_dialog = nullptr;
 }
 
-void DLLPincode::Main() { pdialog->show_with_timer(); }
+// Starts the sequence needed for pincode input if locked is true, else shows locked_card error
+void DLLPincode::Main(bool locked) {
+    if (!locked) {
+        p_dialog->show_with_timer();
+    } else {
+        p_error_dialog->show_locked_card();
+    }
+}
 
-void DLLPincode::Wrong_PIN(int attempts) { perror_dialog->show_error(attempts); }
+// Calls p_error_dialog to show wrongpin error with attempts left as parameter
+void DLLPincode::Wrong_PIN(int attempts) { p_error_dialog->show_error(attempts); }
 
-void DLLPincode::Locked_card() { perror_dialog->show_locked_card(); }
+// Calls p_error_dialog to show locked_card error when wrong pincode is given 3 times
+void DLLPincode::Locked_card() { p_error_dialog->show_locked_card(); }
 
-void DLLPincode::Logged_in() { pdialog->close(); }
+// Closes dialog when correct pincode is given
+void DLLPincode::Logged_in() { p_dialog->close(); }
 
+// Emits signal containing inserted pincode
 void DLLPincode::get_pin(QByteArray PIN) { emit send_pin(PIN); }

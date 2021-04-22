@@ -6,13 +6,18 @@ start_window::start_window(QWidget *parent) : QMainWindow(parent), ui(new Ui::st
     ui->setupUi(this);
     p_pincode = new DLLPincode;
     p_main_window = new Main_window;
-    p_pincode->Main();
+  
     p_main_window->set_ids(1);
-    p_main_window->show();
+    p_pincode->Main(bool());
 
+    p_main_window->show();
     p_rest = new dll_rest_api;
+    p_main_window->set_ids(1);
     connect(p_rest, &dll_rest_api::logged_in, this, &start_window::logged_in);
     connect(p_pincode, SIGNAL(send_pin(QByteArray)), this, SLOT(pin_received(QByteArray)));
+    connect(p_rest, SIGNAL(wrong_pin(int)), p_pincode, SLOT(Wrong_PIN(int)));
+    connect(p_rest, SIGNAL(card_locked()), p_pincode, SLOT(Locked_card()));
+    connect(p_rest, SIGNAL(logged_in(ids_t)), p_pincode, SLOT(Logged_in()));
 }
 
 start_window::~start_window() {
@@ -38,6 +43,6 @@ void start_window::pin_received(QByteArray hash) {
 
 void start_window::card_inserted() {  // Showing the DLLPincode ui when card is inserted
     this->close();
-    p_pincode->Main();
+    p_pincode->Main(bool());
     p_main_window->show();
 }

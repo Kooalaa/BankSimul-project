@@ -12,6 +12,7 @@ SOURCES += \
     balance.cpp \
     browse_transactions.cpp \
     deposit.cpp \
+    deposit_instructions.cpp \
     main.cpp \
     main_window.cpp \
     start_window.cpp \
@@ -21,6 +22,7 @@ HEADERS += \
     balance.h \
     browse_transactions.h \
     deposit.h \
+    deposit_instructions.h \
     main_window.h \
     start_window.h \
     withdraw.h
@@ -29,6 +31,7 @@ FORMS += \
     balance.ui \
     browse_transactions.ui \
     deposit.ui \
+    deposit_instructions.ui \
     main_window.ui \
     start_window.ui \
     withdraw.ui

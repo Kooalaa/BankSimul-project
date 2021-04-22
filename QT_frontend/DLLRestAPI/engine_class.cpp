@@ -10,11 +10,10 @@ engine_class::~engine_class() {
 
 // Post request to check the login credential and login if they match.
 void engine_class::login(QByteArray hash, int card_num) {
+    QString site_url = site_base_url + "/login";
     QJsonObject json;
     json.insert("hash", QString(hash.toBase64()));
     json.insert("card_num", card_num);
-
-    QString site_url = site_base_url + "/login";
 
     QNetworkRequest request(site_url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -60,8 +59,8 @@ void engine_class::card_status(int card_num) {
     connect(reply, &QNetworkReply::finished, this, &engine_class::card_response);
 }
 
-// Request to get ten transactions
-// The index is used to select witch set of ten transactions to reques
+// Request to get ten transactions.
+// The index is used to select witch set of ten transactions to request.
 void engine_class::transactions(int account_id, int index) {
     QString site_url =
         site_base_url + "/actions/" + QString().setNum(account_id) + "/" + QString().setNum(index);
@@ -74,6 +73,7 @@ void engine_class::transactions(int account_id, int index) {
     connect(reply, &QNetworkReply::finished, this, &engine_class::transactions_response);
 }
 
+// Request to add a transation to the database.
 void engine_class::add_transaction(int account_id, double sum) {
     QString site_url = site_base_url + "/actions";
     QJsonObject json;
@@ -94,6 +94,7 @@ void engine_class::add_transaction(int account_id, double sum) {
     });
 }
 
+// Set the new balance to the database.
 void engine_class::edit_balance(int account_id, double new_balance) {
     QString site_url = site_base_url + "/account";
     QJsonObject json;
@@ -102,7 +103,6 @@ void engine_class::edit_balance(int account_id, double new_balance) {
 
     QNetworkRequest request(site_url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    context = new QObject;
 
     QNetworkReply *reply = p_manager->put(request, QJsonDocument(json).toJson());
 
@@ -115,7 +115,7 @@ void engine_class::edit_balance(int account_id, double new_balance) {
     });
 }
 
-// Gets the ammount of trans actions on the account.
+// Gets the ammount of transactions on the account.
 void engine_class::transaction_amount(int account_id) {
     QString site_url = site_base_url + "/actions/" + QString().setNum(account_id);
 
@@ -134,7 +134,7 @@ void engine_class::transaction_amount(int account_id) {
     });
 }
 
-// Receives the request response message
+// Receives the request response for login data.
 void engine_class::login_response() {
     QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
     QJsonObject json_obj = get_json_object(*reply);
@@ -152,6 +152,7 @@ void engine_class::login_response() {
     reply->deleteLater();
 }
 
+// Receives the request respose for customer information.
 void engine_class::customer_response() {
     QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
     QJsonObject json_obj = get_json_object(*reply);
@@ -165,6 +166,7 @@ void engine_class::customer_response() {
     reply->deleteLater();
 }
 
+// Receives the request respose for account information.
 void engine_class::account_response() {
     QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
     QJsonObject json_obj = get_json_object(*reply);
@@ -176,6 +178,7 @@ void engine_class::account_response() {
     reply->deleteLater();
 }
 
+// Receives the request response for card information.
 void engine_class::card_response() {
     QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
     QJsonObject json_obj = get_json_object(*reply);
@@ -187,6 +190,7 @@ void engine_class::card_response() {
     reply->deleteLater();
 }
 
+// Receives the ten transactions that was requested.
 void engine_class::transactions_response() {
     QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
     QJsonArray json_arr = get_json_array(*reply);
@@ -217,6 +221,7 @@ void engine_class::transactions_response() {
     reply->deleteLater();
 }
 
+// Couple helper functions to get the json data.
 QJsonObject engine_class::get_json_object(QNetworkReply &reply) {
     QByteArray response_data = reply.readAll();
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
