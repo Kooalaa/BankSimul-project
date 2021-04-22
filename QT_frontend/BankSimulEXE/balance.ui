@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>392</width>
+    <width>395</width>
     <height>334</height>
    </rect>
   </property>
@@ -104,7 +104,7 @@
      <item>
       <layout class="QFormLayout" name="formLayout_3">
        <item row="0" column="0">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="phone_text">
          <property name="font">
           <font>
            <pointsize>10</pointsize>
@@ -116,7 +116,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="account_num_text">
          <property name="font">
           <font>
            <pointsize>10</pointsize>
@@ -128,7 +128,7 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLabel" name="label_3">
+        <widget class="QLabel" name="account_num_label">
          <property name="font">
           <font>
            <pointsize>10</pointsize>
@@ -143,7 +143,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLabel" name="label_4">
+        <widget class="QLabel" name="phone_label">
          <property name="font">
           <font>
            <pointsize>10</pointsize>

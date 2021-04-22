@@ -95,7 +95,7 @@ void engine_class::add_transaction(int account_id, double sum) {
 }
 
 void engine_class::edit_balance(int account_id, double new_balance) {
-    QString site_url = site_base_url + "/actions";
+    QString site_url = site_base_url + "/account";
     QJsonObject json;
     json.insert("account_id", account_id);
     json.insert("new_balance", new_balance);
@@ -104,7 +104,7 @@ void engine_class::edit_balance(int account_id, double new_balance) {
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     context = new QObject;
 
-    QNetworkReply *reply = p_manager->post(request, QJsonDocument(json).toJson());
+    QNetworkReply *reply = p_manager->put(request, QJsonDocument(json).toJson());
 
     connect(reply, &QNetworkReply::finished, this, [this]() {
         QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
@@ -194,14 +194,12 @@ void engine_class::transactions_response() {
 
     foreach (const QJsonValue &json_val, json_arr) {
         QJsonObject json_obj = json_val.toObject();
-
         // clang-format off
         transaction_t transaction {
             .sum = json_obj["Summa"].toDouble(),
             .date = [&] {
                 QString str = json_obj["Aika"].toString();
                 QStringList list = str.split("T");
-                list[0].remove(0, 1);
                 return list[0];
             }(),
             .time = [&] {

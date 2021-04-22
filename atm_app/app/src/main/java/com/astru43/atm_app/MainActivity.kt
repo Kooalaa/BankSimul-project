@@ -2,6 +2,7 @@ package com.astru43.atm_app
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -12,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,24 +22,31 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         val queue = Volley.newRequestQueue(this)
-        val url = "http://astru.ddns.net:8080/mobile/mobile"
 
         val sendButton: Button = findViewById(R.id.button)
         sendButton.setOnClickListener {
-            val token = UtilPreferences.getToken(this)
             val inputId: EditText = findViewById(R.id.inputId)
-            val requestBody = JSONObject()
-            requestBody.put("mobile_identification", token)
-            requestBody.put("accept_status", true)
-            requestBody.put("atm_token", inputId.text.toString())
-            val request = JsonObjectRequest(Request.Method.POST, url, requestBody, { response ->
+            val url = "http://astru.ddns.net:8080/mobile/mobile/" + inputId.text.toString()
+
+            val request = JsonObjectRequest(Request.Method.GET, url, null, { response ->
                 val textView: TextView = findViewById(R.id.response)
-                textView.text = "Response: %s".format(response.toString())
+                textView.text = "Response: %s".format(response)
+
+                if (response.has("error")) {
+                    Log.i("Response", response.toString())
+                    if (response.getString("error") == "No such atm token")
+                        textView.text = response.getString("error")
+                } else {
+                    val intent = Intent(this, AcceptLogin::class.java).putExtra(
+                        "com.astru43.atm_app.ATM_TOKEN",
+                        inputId.text.toString()
+                    )
+                    startActivity(intent)
+                }
             }, { error ->
                 val textView: TextView = findViewById(R.id.response)
                 textView.text = error.localizedMessage
             })
-
 
             queue.add(request)
         }
