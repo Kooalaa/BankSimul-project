@@ -36,7 +36,7 @@ void Main_window::on_Deposit_btn_clicked() { p_deposit_instruct->reset(p_ids); }
 
 void Main_window::on_Show_balance_btn_clicked() {
     p_balance->init_and_show(p_ids, this);
-    qDebug() << this->height() << "x" << this->width();
+    // qDebug() << this->height() << "x" << this->width();
     this->hide();
 }
 

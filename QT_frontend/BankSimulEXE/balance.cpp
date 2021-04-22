@@ -6,6 +6,7 @@
 balance::balance(QWidget *parent) : QDialog(parent), ui(new Ui::balance) {
     ui->setupUi(this);
     p_timer = new QTimer;
+    p_rest = new dll_rest_api;
     ui->transactions_view->setSelectionMode(QAbstractItemView::NoSelection);
     ui->transactions_view->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
@@ -16,28 +17,17 @@ balance::balance(QWidget *parent) : QDialog(parent), ui(new Ui::balance) {
         else
             ui->time->setNum(time);
     });
-}
-
-balance::~balance() {
-    delete ui;
-    delete p_timer;
-}
-
-void balance::init_and_show(ids_t *ids, QDialog *main_wnd) {
-    p_ids = ids;
-    this->main_wnd = main_wnd;
-    p_rest = new dll_rest_api;
-    time = 10;
-    ui->time->setNum(time);
 
     connect(p_rest, qOverload<customer_info_t>(&dll_rest_api::info_ready), this,
             [this](customer_info_t info) {
                 ui->user_label->setText(info.first_name + " " + info.last_name);
                 ui->address_label->setText(info.address);
+                ui->phone_label->setText(info.phone_num);
             });
     connect(p_rest, qOverload<account_info_t>(&dll_rest_api::info_ready), this,
             [this](account_info_t info) {
                 ui->balance_label->setText(QString().setNum(info.balance));
+                ui->account_num_label->setText(info.account_num);
             });
     connect(p_rest, qOverload<QVector<transaction_t>>(&dll_rest_api::info_ready), this,
             [this](QVector<transaction_t> transactions) {
@@ -59,12 +49,25 @@ void balance::init_and_show(ids_t *ids, QDialog *main_wnd) {
                     ui->transactions_view->setItem(i, 2, sum);
                 }
             });
+}
+
+balance::~balance() {
+    delete ui;
+    delete p_timer;
+    delete p_rest;
+}
+
+void balance::init_and_show(ids_t *ids, QDialog *main_wnd) {
+    p_ids = ids;
+    this->main_wnd = main_wnd;
+    time = 30;
+    ui->time->setNum(time);
 
     p_rest->get_customer_info(p_ids->customer_id);
     p_rest->get_account_info(p_ids->account_id);
     p_rest->get_transactions(p_ids->account_id, 0);
-    this->show();
     p_timer->start(1000);
+    this->show();
 }
 
 void balance::on_close_btn_clicked() {
@@ -72,8 +75,6 @@ void balance::on_close_btn_clicked() {
     this->close();
     main_wnd->show();
 
-    delete p_rest;
-    p_rest = nullptr;
     p_ids = nullptr;
     main_wnd = nullptr;
 }

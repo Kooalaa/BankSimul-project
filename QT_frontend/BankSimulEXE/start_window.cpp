@@ -6,7 +6,10 @@ start_window::start_window(QWidget *parent) : QMainWindow(parent), ui(new Ui::st
     ui->setupUi(this);
     p_pincode = new DLLPincode;
     p_main_window = new Main_window;
+  
+    p_main_window->set_ids(1);
     p_pincode->Main(bool());
+
     p_main_window->show();
     p_rest = new dll_rest_api;
     p_main_window->set_ids(1);

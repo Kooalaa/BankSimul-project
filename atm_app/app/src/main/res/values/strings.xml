@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">atm_app</string>
+    <string name="login_warning">Do you want to login</string>
+</resources>
