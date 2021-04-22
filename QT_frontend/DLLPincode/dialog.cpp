@@ -27,7 +27,7 @@ void Dialog::show_with_timer() {
     this->show();
 }
 
-void Dialog::Timer_slot() {  // Updating the time to ui.label every second
+void Dialog::Timer_slot() {
     ui->label->setNum(time);
     time--;
     if (time < 0) {
@@ -35,7 +35,7 @@ void Dialog::Timer_slot() {  // Updating the time to ui.label every second
     }
 }
 
-void Dialog::on_OK_clicked() {  // Saving and emitting signal containing written pincode
+void Dialog::on_OK_clicked() {
     p_timer->stop();
     PIN = ui->lineEdit->text();
     QByteArray temp(PIN.toLocal8Bit());
@@ -43,7 +43,7 @@ void Dialog::on_OK_clicked() {  // Saving and emitting signal containing written
     emit send_pin(hash);
 }
 
-void Dialog::Handle_Buttons(QAbstractButton *button) {  // Handling the numpad operations
+void Dialog::Handle_Buttons(QAbstractButton *button) {
     button->text();
     ui->lineEdit->setText(ui->lineEdit->text() + button->text());
     p_timer->start();

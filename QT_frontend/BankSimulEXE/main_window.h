@@ -7,7 +7,7 @@
 
 #include "balance.h"
 #include "browse_transactions.h"
-#include "deposit.h"
+#include "deposit_instructions.h"
 #include "withdraw.h"
 
 namespace Ui {
@@ -34,8 +34,10 @@ private:
     withdraw *p_withdraw;
     browse_transactions *p_browse;
     balance *p_balance;
-    deposit *p_deposit;
+    deposit_instructions *p_deposit_instruct;
     ids_t *p_ids;
+    QTimer *p_timer;
+    dll_rest_api *p_rest;
 };
 
 #endif  // MAIN_WINDOW_H
