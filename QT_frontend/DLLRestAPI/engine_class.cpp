@@ -9,7 +9,7 @@ engine_class::~engine_class() {
 }
 
 // Post request to check the login credential and login if they match.
-void engine_class::login(QByteArray hash, int card_num) {
+void engine_class::login(QByteArray hash, long long card_num) {
     QString site_url = site_base_url + "/login";
     QJsonObject json;
     json.insert("hash", QString(hash.toBase64()));

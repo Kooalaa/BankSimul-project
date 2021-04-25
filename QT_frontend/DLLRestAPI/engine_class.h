@@ -40,7 +40,7 @@ class engine_class : public QObject {
 public:
     engine_class();
     ~engine_class();
-    void login(QByteArray hash, int card_num);
+    void login(QByteArray hash, long long card_num);
     void customer_info(int customer_id);
     void account_info(int account_id);
     void card_status(int card_num);

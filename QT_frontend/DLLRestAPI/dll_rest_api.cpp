@@ -27,7 +27,7 @@ dll_rest_api::~dll_rest_api() {
     p_engine = nullptr;
 }
 
-void dll_rest_api::login(QByteArray hash, int card_num) { p_engine->login(hash, card_num); }
+void dll_rest_api::login(QByteArray hash, long long card_num) { p_engine->login(hash, card_num); }
 void dll_rest_api::get_customer_info(int customer_id) { p_engine->customer_info(customer_id); }
 void dll_rest_api::get_account_info(int account_id) { p_engine->account_info(account_id); }
 void dll_rest_api::get_card_status(int card_num) { p_engine->card_status(card_num); }
