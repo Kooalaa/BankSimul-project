@@ -1,5 +1,6 @@
 #include "balance.h"
 
+#include "main_window.h"
 #include "ui_balance.h"
 
 balance::balance(QWidget *parent) : QDialog(parent), ui(new Ui::balance) {
@@ -56,7 +57,7 @@ balance::~balance() {
     delete p_rest;
 }
 
-void balance::init_and_show(ids_t *ids, QDialog *main_wnd) {
+void balance::init_and_show(ids_t *ids, Main_window *main_wnd) {
     p_ids = ids;
     this->main_wnd = main_wnd;
     time = 30;
@@ -76,4 +77,10 @@ void balance::on_close_btn_clicked() {
 
     p_ids = nullptr;
     main_wnd = nullptr;
+}
+
+void balance::on_logout_btn_clicked() {
+    p_timer->stop();
+    this->close();
+    emit main_wnd->logout();
 }
