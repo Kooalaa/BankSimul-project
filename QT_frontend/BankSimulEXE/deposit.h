@@ -20,6 +20,7 @@ public:
     double sum;
     QString account_num;
     double balance;
+    void show_ui(QString, double, QString);
 signals:
     void ready();
 private slots:
