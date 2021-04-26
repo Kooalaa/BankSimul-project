@@ -25,10 +25,10 @@ class DLLRESTAPI_EXPORT dll_rest_api : public QObject {
 public:
     dll_rest_api(QObject *parent = nullptr);
     ~dll_rest_api();
-    void login(QByteArray hash, int card_num);
+    void login(QByteArray hash, long long card_num);
     void get_customer_info(int customer_id);
     void get_account_info(int account_id);
-    void get_card_status(int card_num);
+    void get_card_status(long long card_num);
     void get_transactions(int account_id, int index);
     void add_transaction(int account_id, double sum);
     void set_new_balance(int account_id, double sum);

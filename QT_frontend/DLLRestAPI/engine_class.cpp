@@ -9,7 +9,7 @@ engine_class::~engine_class() {
 }
 
 // Post request to check the login credential and login if they match.
-void engine_class::login(QByteArray hash, int card_num) {
+void engine_class::login(QByteArray hash, long long card_num) {
     QString site_url = site_base_url + "/login";
     QJsonObject json;
     json.insert("hash", QString(hash.toBase64()));
@@ -48,7 +48,7 @@ void engine_class::account_info(int account_id) {
 }
 
 // Request to get info if the card is locked and how many attempts before the card will lock.
-void engine_class::card_status(int card_num) {
+void engine_class::card_status(long long card_num) {
     QString site_url = site_base_url + "/card/" + QString().setNum(card_num);
 
     QNetworkRequest request(site_url);

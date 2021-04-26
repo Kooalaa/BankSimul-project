@@ -44,9 +44,10 @@ void Main_window::on_Deposit_btn_clicked() {
 }
 
 void Main_window::on_Show_balance_btn_clicked() {
+
     stop_timer();
-    p_balance->init_and_show(p_ids, this);
     // qDebug() << this->height() << "x" << this->width();
+    p_balance->init_and_show(p_ids, this);
     this->hide();
 }
 
@@ -88,3 +89,5 @@ void Main_window::stop_timer() {
     time = 30;
     ui->time->setNum(time);
 }
+
+void Main_window::on_Log_out_btn_clicked() { emit logout(); }
