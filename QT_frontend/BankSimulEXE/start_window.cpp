@@ -6,7 +6,7 @@ start_window::start_window(QWidget *parent) : QMainWindow(parent), ui(new Ui::st
     ui->setupUi(this);
     p_pincode = new DLLPincode;
     p_main_window = new Main_window;
-  
+
     p_main_window->set_ids(1);
     p_pincode->Main(bool());
 
@@ -37,7 +37,7 @@ void start_window::logged_in(ids_t ids) {
 }
 
 void start_window::pin_received(QByteArray hash) {
-    int card_num = 1561;
+    long long card_num = 21488175058;
     p_rest->login(hash, card_num);
 }
 

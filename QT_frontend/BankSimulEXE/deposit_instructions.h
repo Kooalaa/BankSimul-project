@@ -25,7 +25,8 @@ private slots:
     void deposit_done();
     void timer();
     void on_Close_clicked();
-    void update_balance(account_info_t info);
+    void set_account_info(account_info_t info);
+    void set_customer_info(customer_info_t);
 
 private:
     Ui::deposit_instructions *ui;
@@ -37,6 +38,7 @@ private:
     double new_balance;
     ids_t *p_id;
     account_info_t info;
+    QString name;
 };
 
 #endif  // DEPOSIT_INSTRUCTIONS_H

@@ -53,7 +53,7 @@ private:
     QNetworkAccessManager *p_manager;
     QJsonObject get_json_object(QNetworkReply &reply);
     QJsonArray get_json_array(QNetworkReply &reply);
-    const QString site_base_url = "http://192.168.1.2:8080";
+    const QString site_base_url = "http://astru.ddns.net:8080";
 
 signals:
     void result_ready(int status, int attempts, ids_t ids);

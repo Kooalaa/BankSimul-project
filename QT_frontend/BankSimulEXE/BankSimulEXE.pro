@@ -16,7 +16,9 @@ SOURCES += \
     main.cpp \
     main_window.cpp \
     start_window.cpp \
-    withdraw.cpp
+    withdraw.cpp \
+    withdraw_done.cpp \
+    withdraw_error.cpp
 
 HEADERS += \
     balance.h \
@@ -25,7 +27,9 @@ HEADERS += \
     deposit_instructions.h \
     main_window.h \
     start_window.h \
-    withdraw.h
+    withdraw.h \
+    withdraw_done.h \
+    withdraw_error.h
 
 FORMS += \
     balance.ui \
@@ -34,7 +38,9 @@ FORMS += \
     deposit_instructions.ui \
     main_window.ui \
     start_window.ui \
-    withdraw.ui
+    withdraw.ui \
+    withdraw_done.ui \
+    withdraw_error.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

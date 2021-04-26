@@ -16,7 +16,6 @@ public:
     explicit balance(QWidget *parent = nullptr);
     ~balance();
     void init_and_show(ids_t *ids, QDialog *main_wnd);
-
 private slots:
     void on_close_btn_clicked();
 
