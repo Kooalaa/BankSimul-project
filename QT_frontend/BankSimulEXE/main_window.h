@@ -22,13 +22,6 @@ public:
     ~Main_window();
     void set_ids(ids_t ids);
 
-private slots:
-    void on_Browse_transactions_btn_clicked();
-    void on_Deposit_btn_clicked();
-    void on_Show_balance_btn_clicked();
-    void on_Withdraw_btn_clicked();
-    void on_Log_out_btn_clicked();
-
 private:
     Ui::Main_window *ui;
     withdraw *p_withdraw;
@@ -38,6 +31,16 @@ private:
     ids_t *p_ids;
     QTimer *p_timer;
     dll_rest_api *p_rest;
+
+signals:
+    void logout();
+
+private slots:
+    void on_Browse_transactions_btn_clicked();
+    void on_Deposit_btn_clicked();
+    void on_Show_balance_btn_clicked();
+    void on_Withdraw_btn_clicked();
+    void on_Log_out_btn_clicked();
 };
 
 #endif  // MAIN_WINDOW_H
