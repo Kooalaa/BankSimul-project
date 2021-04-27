@@ -34,7 +34,6 @@ private:
     int time = 30;
     QString name;
 
-
 signals:
     void logout();
 
