@@ -23,6 +23,9 @@ Dialog::~Dialog() {
 }
 
 void Dialog::show_with_timer() {
+    time = 10;
+    ui->label->setNum(time);
+    ui->lineEdit->setText("");
     p_timer->start(1000);
     this->show();
 }
