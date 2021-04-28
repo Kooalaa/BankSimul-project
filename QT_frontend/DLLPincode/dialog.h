@@ -18,7 +18,6 @@ class Dialog : public QDialog {
 public:
     explicit Dialog(QWidget *parent = nullptr);
     ~Dialog();
-    Ui::Dialog *ui;
     void show_with_timer();
 signals:
     void send_pin(QByteArray);
@@ -31,11 +30,13 @@ private slots:
     void Timer_slot();
 
 private:
+    Ui::Dialog *ui;
     QString PIN;
     QByteArray hash;
     int time = 10;
     QTimer *p_timer;
     void timer();
+    void stop_timer();
 };
 
 #endif  // DIALOG_H

@@ -24,7 +24,10 @@ void DLLPincode::Main(bool locked) {
 }
 
 // Calls p_error_dialog to show wrongpin error with attempts left as parameter
-void DLLPincode::Wrong_PIN(int attempts) { p_error_dialog->show_error(attempts); }
+void DLLPincode::Wrong_PIN(int attempts) {
+    p_error_dialog->show_error(attempts);
+    p_dialog->show_with_timer();
+}
 
 // Calls p_error_dialog to show locked_card error when wrong pincode is given 3 times
 void DLLPincode::Locked_card() { p_error_dialog->show_locked_card(); }

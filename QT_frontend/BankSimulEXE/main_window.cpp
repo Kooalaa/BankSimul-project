@@ -4,6 +4,7 @@
 
 Main_window::Main_window(QWidget *parent) : QDialog(parent), ui(new Ui::Main_window) {
     ui->setupUi(this);
+    p_rest = new dll_rest_api;
     p_timer = new QTimer;
     p_deposit_instruct = new deposit_instructions();
     p_withdraw = new withdraw();
