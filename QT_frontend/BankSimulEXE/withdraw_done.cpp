@@ -4,12 +4,15 @@
 
 withdraw_done::withdraw_done(QWidget *parent) : QDialog(parent), ui(new Ui::withdraw_done) {
     ui->setupUi(this);
-    ui->time->setNum(time);
     p_timer = new QTimer;
     connect(p_timer, SIGNAL(timeout()), this, SLOT(timer()));
 }
 
-withdraw_done::~withdraw_done() { delete ui; }
+withdraw_done::~withdraw_done() {
+    delete p_timer;
+    p_timer = nullptr;
+    delete ui;
+}
 
 void withdraw_done::show_ui(QString account_num, double new_balance, QString name) {
     p_timer->start(1000);

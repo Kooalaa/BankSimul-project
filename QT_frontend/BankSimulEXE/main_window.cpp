@@ -4,6 +4,7 @@
 
 Main_window::Main_window(QWidget *parent) : QDialog(parent), ui(new Ui::Main_window) {
     ui->setupUi(this);
+    p_rest = new dll_rest_api;
     p_timer = new QTimer;
     p_deposit_instruct = new deposit_instructions();
     p_withdraw = new withdraw();
@@ -44,7 +45,6 @@ void Main_window::on_Deposit_btn_clicked() {
 }
 
 void Main_window::on_Show_balance_btn_clicked() {
-
     stop_timer();
     // qDebug() << this->height() << "x" << this->width();
     p_balance->init_and_show(p_ids, this);
@@ -54,11 +54,6 @@ void Main_window::on_Show_balance_btn_clicked() {
 void Main_window::on_Withdraw_btn_clicked() {
     stop_timer();
     p_withdraw->show_ui(p_ids);
-}
-
-void Main_window::on_Log_out_btn_clicked() {
-    stop_timer();
-    this->close();
 }
 
 void Main_window::timer() {

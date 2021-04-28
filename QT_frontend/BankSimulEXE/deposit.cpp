@@ -34,7 +34,6 @@ void deposit::timer() {
 
 void deposit::handle_buttons(QAbstractButton *button) {
     stop_timer();
-    p_timer->start();
     QString temp = ui->lineEdit->text();
     QStringList list = temp.split(".");
     if (list.size() > 1) {
@@ -43,6 +42,7 @@ void deposit::handle_buttons(QAbstractButton *button) {
         }
     }
     ui->lineEdit->setText(ui->lineEdit->text() + button->text());
+    p_timer->start();
 }
 
 void deposit::on_pushButton_12_clicked() {
