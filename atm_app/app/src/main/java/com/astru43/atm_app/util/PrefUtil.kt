@@ -1,4 +1,4 @@
-package com.astru43.atm_app
+package com.astru43.atm_app.util
 
 import android.content.Context
 import androidx.preference.PreferenceManager

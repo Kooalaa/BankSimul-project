@@ -12,7 +12,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
+import com.astru43.atm_app.util.NetUtil
+import org.json.JSONException
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,12 +23,12 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        val queue = Volley.newRequestQueue(this)
-
         val sendButton: Button = findViewById(R.id.button)
         sendButton.setOnClickListener {
             val inputId: EditText = findViewById(R.id.inputId)
-            val url = "http://astru.ddns.net:8080/mobile/mobile/" + inputId.text.toString()
+            var url = "http://astru.ddns.net:8080/mobile/mobile"
+            if (inputId.text.toString().isNotBlank())
+                url += "/" + inputId.text.toString()
 
             val request = JsonObjectRequest(Request.Method.GET, url, null, { response ->
                 val textView: TextView = findViewById(R.id.response)
@@ -45,10 +47,19 @@ class MainActivity : AppCompatActivity() {
                 }
             }, { error ->
                 val textView: TextView = findViewById(R.id.response)
-                textView.text = error.localizedMessage
+                if(error?.networkResponse?.statusCode == 404) {
+                    try {
+                        val obj = JSONObject(error.networkResponse.data.toString(charset("utf-8")))
+                        textView.text = "Response: %s".format(obj)
+                        Log.i("NOT_FOUND", error.networkResponse.statusCode.toString())
+                    } catch (e: JSONException) {
+                        Log.e("ParseJson", "Could not parse json data")
+                    }
+
+                }
             })
 
-            queue.add(request)
+            NetUtil.getInstance(this).addRequest(request)
         }
     }
 
