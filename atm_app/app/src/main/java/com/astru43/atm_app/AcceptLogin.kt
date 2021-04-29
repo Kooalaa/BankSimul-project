@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.astru43.atm_app.util.UtilPreferences
+import com.astru43.atm_app.util.PrefUtil
 import org.json.JSONObject
 
 class AcceptLogin : AppCompatActivity() {
@@ -18,7 +18,7 @@ class AcceptLogin : AppCompatActivity() {
 
         val queue = Volley.newRequestQueue(this)
         val url = "http://astru.ddns.net:8080/mobile/mobile"
-        val token = UtilPreferences.getToken(this)
+        val token = PrefUtil.getToken(this)
 
         val requestBody = JSONObject()
         requestBody.put("mobile_identification", token)

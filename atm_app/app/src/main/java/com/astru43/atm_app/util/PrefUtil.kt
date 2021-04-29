@@ -3,7 +3,7 @@ package com.astru43.atm_app.util
 import android.content.Context
 import androidx.preference.PreferenceManager
 
-class UtilPreferences {
+class PrefUtil {
 
     companion object {
 
@@ -14,7 +14,7 @@ class UtilPreferences {
             editor.apply()
         }
 
-        fun getToken(context: Context) : String {
+        fun getToken(context: Context): String {
             val preference = PreferenceManager.getDefaultSharedPreferences(context)
             return preference.getString(TOKEN_ID, "NULL")!!
         }

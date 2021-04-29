@@ -5,7 +5,7 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
 
-class NetUtil constructor(context: Context){ode
+class NetUtil constructor(context: Context) {
     companion object {
         @Volatile
         private var INSTANCE: NetUtil? = null
