@@ -22,7 +22,7 @@ app.use(helmet());
 
 
 app.use('/mobile', mobile_router);
-app.use('/login', login_router)
+app.use('/login', login_router);
 app.use('/customer', customer_router);
 app.use('/account', account_router);
 app.use('/actions', actions_router);

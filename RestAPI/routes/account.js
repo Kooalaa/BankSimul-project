@@ -8,11 +8,11 @@ router.get('/:account_id', (req, res) => {
             if (err) res.json(err);
             else res.json(db_result[0]);
         }
-    )
+    );
 });
 
 router.put('/', (req, res) => {
-    console.log(req.body)
+    console.log(req.body);
     model.edit_saldo(req.body.account_id, req.body.new_balance,
         (err, db_result) => {
             if (err) res.json(err);

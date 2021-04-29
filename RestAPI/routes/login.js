@@ -1,4 +1,3 @@
-const { json } = require('express');
 const express = require('express');
 const router = express.Router();
 const { model } = require('../models/login_model');
@@ -21,7 +20,7 @@ router.post('/', (req, res) => {
                 res.json(ret);
             } else {
                 if (db_result[0].Pin == hash) {
-                    var ret = {
+                    ret = {
                         status: 1,
                         ids: {
                             card_id: db_result[0].id,
@@ -30,27 +29,27 @@ router.post('/', (req, res) => {
                         },
                         attempts_left: 3
                     };
-                    model.success(db_result[0].id, (err, db_result) => {
+                    model.success(db_result[0].id, (err) => {
                         if (err) res.json(err);
                         else res.json(ret);
                     });
 
                 } else {
                     var attempts = db_result[0].Väärä_pin - 1;
-                    var ret = {
+                    ret = {
                         status: 0,
                         ids: {},
                         attempts_left: attempts
                     };
 
-                    if (attempts == 0) model.lock_card(db_result[0].id, (err, db_result) => {
+                    if (attempts == 0) model.lock_card(db_result[0].id, (err) => {
                         if (err) res.json(err);
                         else {
                             ret.status = -1;
                             res.json(ret);
                         }
                     });
-                    else model.wrong_pin(db_result[0].id, attempts, (err, db_result) => {
+                    else model.wrong_pin(db_result[0].id, attempts, (err) => {
                         if (err) res.json(err);
                         else res.json(ret);
                     });

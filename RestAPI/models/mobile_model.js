@@ -48,5 +48,21 @@ module.exports.mobile = {
             [card_id],
             callback
         );
-    }
-}
+    },
+
+    login: (card_id, callback) => {
+        db.query(
+            'select id, Asiakas_id, Tili_id, Kortinnumero from Kortti where id=?',
+            [card_id],
+            callback
+        );
+    },
+
+    get_status_with_id: function (card_id, callback) {
+        return db.query(
+            'select * from ATM_tokens where Kortti_id=?',
+            [card_id],
+            callback
+        );
+    },
+};
