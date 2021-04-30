@@ -41,6 +41,13 @@ void Main_window::set_ids(ids_t ids) {
     (*p_ids) = ids;
 }
 
+void Main_window::show_ui() {
+    p_timer->start(1000);
+    p_rest->get_account_info(p_ids->account_id);
+    p_rest->get_customer_info(p_ids->customer_id);
+    this->show();
+}
+
 void Main_window::on_Browse_transactions_btn_clicked() {
     stop_timer();
     p_browse->transaction_menu(p_ids, this);

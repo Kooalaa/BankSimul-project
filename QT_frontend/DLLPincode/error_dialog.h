@@ -15,8 +15,11 @@ public:
     ~Error_dialog();
     void show_error(int attempts);
     void show_locked_card();
+signals:
+    void log_out();
 private slots:
     void timer();
+    void on_pushButton_clicked();
 
 private:
     Ui::Error_dialog *ui;

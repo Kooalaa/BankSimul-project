@@ -4,6 +4,8 @@
 
 Error_dialog::Error_dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Error_dialog) {
     ui->setupUi(this);
+    ui->label_2->show();
+    ui->pushButton->hide();
     p_timer = new QTimer;
     connect(p_timer, SIGNAL(timeout()), this, SLOT(timer()));
 }
@@ -20,7 +22,8 @@ void Error_dialog::show_error(int attempts) {
 
 // Shows cardlocked error
 void Error_dialog::show_locked_card() {
-    p_timer->start(1000);
+    ui->pushButton->show();
+    ui->label_2->hide();
     ui->label->setText("Pin syötetty väärin 3 kertaa, kortti lukittu");
     this->show();
 }
@@ -38,4 +41,9 @@ void Error_dialog::stop_timer() {
     p_timer->stop();
     time = 2;
     ui->label_2->setNum(time);
+}
+
+void Error_dialog::on_pushButton_clicked() {
+    this->close();
+    emit log_out();
 }

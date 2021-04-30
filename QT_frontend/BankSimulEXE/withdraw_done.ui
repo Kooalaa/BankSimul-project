@@ -72,7 +72,7 @@
       <enum>QFrame::Box</enum>
      </property>
      <property name="text">
-      <string>Talletus onnistui.</string>
+      <string>Nosto onnistui.</string>
      </property>
     </widget>
    </item>

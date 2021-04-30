@@ -18,6 +18,7 @@ start_window::start_window(QWidget *parent) : QMainWindow(parent), ui(new Ui::st
     connect(p_rest, SIGNAL(wrong_pin(int)), p_pincode, SLOT(Wrong_PIN(int)));
     connect(p_rest, SIGNAL(card_locked()), p_pincode, SLOT(Locked_card()));
     connect(p_rest, SIGNAL(logged_in(ids_t)), p_pincode, SLOT(Logged_in()));
+    connect(p_pincode, SIGNAL(locked()), this, SLOT(logout()));
 
     p_serial_port = new DLLSerialPort;
     connect(p_serial_port, &DLLSerialPort::card_read, this, &start_window::card_inserted);
@@ -39,7 +40,7 @@ start_window::~start_window() {
 
 void start_window::logged_in(ids_t ids) {
     p_main_window->set_ids(ids);
-    p_main_window->show();
+    p_main_window->show_ui();
 }
 
 void start_window::pin_received(QByteArray hash) {
