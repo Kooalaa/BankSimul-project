@@ -20,6 +20,7 @@ public:
     explicit Main_window(QWidget *parent = nullptr);
     ~Main_window();
     void set_ids(ids_t ids);
+    void show_ui();
 
 private:
     Ui::Main_window *ui;
