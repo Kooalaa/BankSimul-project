@@ -4,6 +4,7 @@ DLLPincode::DLLPincode(QObject *parent) : QObject(parent) {
     p_error_dialog = new Error_dialog();
     p_dialog = new Dialog();
     connect(p_dialog, SIGNAL(send_pin(QByteArray)), this, SLOT(get_pin(QByteArray)));
+    connect(p_error_dialog, SIGNAL(log_out()), this, SLOT(log_out()));
 }
 
 // Deleting pointers and making them nullpointers
@@ -24,7 +25,10 @@ void DLLPincode::Main(bool locked) {
 }
 
 // Calls p_error_dialog to show wrongpin error with attempts left as parameter
-void DLLPincode::Wrong_PIN(int attempts) { p_error_dialog->show_error(attempts); }
+void DLLPincode::Wrong_PIN(int attempts) {
+    p_error_dialog->show_error(attempts);
+    p_dialog->show_with_timer();
+}
 
 // Calls p_error_dialog to show locked_card error when wrong pincode is given 3 times
 void DLLPincode::Locked_card() { p_error_dialog->show_locked_card(); }
@@ -34,3 +38,5 @@ void DLLPincode::Logged_in() { p_dialog->close(); }
 
 // Emits signal containing inserted pincode
 void DLLPincode::get_pin(QByteArray PIN) { emit send_pin(PIN); }
+
+void DLLPincode::log_out() { emit locked(); }

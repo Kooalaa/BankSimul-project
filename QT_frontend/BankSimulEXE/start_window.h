@@ -3,6 +3,7 @@
 
 #include <dll_rest_api.h>
 #include <dllpincode.h>
+#include <dllserialport.h>
 
 #include <QDebug>
 #include <QMainWindow>
@@ -22,15 +23,18 @@ public:
     start_window(QWidget *parent = nullptr);
     ~start_window();
 
-private slots:
-    void logged_in(ids_t ids);
-    void pin_received(QByteArray hash);
-    void card_inserted();
-
 private:
     Ui::start_window *ui;
     DLLPincode *p_pincode;
     Main_window *p_main_window;
     dll_rest_api *p_rest;
+    DLLSerialPort *p_serial_port;
+
+private slots:
+    void logged_in(ids_t ids);
+    void pin_received(QByteArray hash);
+    void card_inserted(QString num);
+    void get_status(bool locked);
+    void logout();
 };
 #endif  // START_WINDOW_H

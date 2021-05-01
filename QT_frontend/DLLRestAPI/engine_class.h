@@ -50,7 +50,7 @@ public:
     void login(QByteArray hash, long long card_num);
     void customer_info(int customer_id);
     void account_info(int account_id);
-    void card_status(int card_num);
+    void card_status(long long card_num);
     void transactions(int account_id, int index);
     void add_transaction(int account_id, double sum);
     void edit_balance(int account_id, double new_balance);
@@ -60,7 +60,7 @@ private:
     QNetworkAccessManager *p_manager;
     QJsonObject get_json_object(QNetworkReply &reply);
     QJsonArray get_json_array(QNetworkReply &reply);
-    const QString site_base_url = "http://192.168.1.2:8080";
+    const QString site_base_url = "http://astru.ddns.net:8080";
 
 signals:
     void result_ready(int status, int attempts, ids_t ids);

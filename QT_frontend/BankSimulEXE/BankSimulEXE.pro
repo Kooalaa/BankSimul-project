@@ -1,4 +1,4 @@
-QT       += core gui network
+QT       += core gui network serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,7 +16,9 @@ SOURCES += \
     main.cpp \
     main_window.cpp \
     start_window.cpp \
-    withdraw.cpp
+    withdraw.cpp \
+    withdraw_done.cpp \
+    withdraw_error.cpp
 
 HEADERS += \
     balance.h \
@@ -25,7 +27,9 @@ HEADERS += \
     deposit_instructions.h \
     main_window.h \
     start_window.h \
-    withdraw.h
+    withdraw.h \
+    withdraw_done.h \
+    withdraw_error.h
 
 FORMS += \
     balance.ui \
@@ -34,7 +38,9 @@ FORMS += \
     deposit_instructions.ui \
     main_window.ui \
     start_window.ui \
-    withdraw.ui
+    withdraw.ui \
+    withdraw_done.ui \
+    withdraw_error.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -54,3 +60,8 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build-DLLRestAPI-Des
 
 INCLUDEPATH += $$PWD/../DLLRestAPI
 DEPENDPATH += $$PWD/../DLLRestAPI
+
+win32: LIBS += -L$$PWD/../build-DLLSerialPort-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/ -lDLLSerialPort
+
+INCLUDEPATH += $$PWD/../DLLSerialPort
+DEPENDPATH += $$PWD/../DLLSerialPort

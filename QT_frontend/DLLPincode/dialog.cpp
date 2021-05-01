@@ -23,6 +23,9 @@ Dialog::~Dialog() {
 }
 
 void Dialog::show_with_timer() {
+    time = 10;
+    ui->label->setNum(time);
+    ui->lineEdit->setText("");
     p_timer->start(1000);
     this->show();
 }
@@ -35,8 +38,14 @@ void Dialog::Timer_slot() {
     }
 }
 
-void Dialog::on_OK_clicked() {
+void Dialog::stop_timer() {
     p_timer->stop();
+    time = 10;
+    ui->label->setNum(time);
+}
+
+void Dialog::on_OK_clicked() {
+    stop_timer();
     PIN = ui->lineEdit->text();
     QByteArray temp(PIN.toLocal8Bit());
     hash = QCryptographicHash::hash(temp, QCryptographicHash::Sha3_256);
@@ -44,13 +53,19 @@ void Dialog::on_OK_clicked() {
 }
 
 void Dialog::Handle_Buttons(QAbstractButton *button) {
+    stop_timer();
     button->text();
     ui->lineEdit->setText(ui->lineEdit->text() + button->text());
     p_timer->start();
-    time = 10;
-    ui->label->setNum(time);
 }
 
-void Dialog::on_Close_clicked() { this->close(); }
+void Dialog::on_Close_clicked() {
+    stop_timer();
+    this->close();
+}
 
-void Dialog::on_Backspace_clicked() { ui->lineEdit->backspace(); }
+void Dialog::on_Backspace_clicked() {
+    stop_timer();
+    p_timer->start();
+    ui->lineEdit->backspace();
+}

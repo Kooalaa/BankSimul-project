@@ -11,14 +11,16 @@ deposit_instructions::deposit_instructions(QWidget *parent)
     connect(p_deposit->p_timer, SIGNAL(timeout()), p_deposit, SLOT(timer()), Qt::DirectConnection);
     connect(p_timer, SIGNAL(timeout()), this, SLOT(timer()), Qt::DirectConnection);
     connect(p_deposit, SIGNAL(ready()), this, SLOT(deposit_done()));
-    connect(p_rest, SIGNAL(info_ready(account_info_t)), this, SLOT(update_balance(account_info_t)));
+    // clang-format off
+    connect(p_rest, SIGNAL(info_ready(account_info_t)), this, SLOT(set_account_info(account_info_t)));
+    connect(p_rest, SIGNAL(info_ready(customer_info_t)), this, SLOT(set_customer_info(customer_info_t)));
+    // clang-format on
 }
 
 deposit_instructions::~deposit_instructions() { delete ui; }
 
 void deposit_instructions::on_start_clicked() {  // Shows the deposit.ui and starts timer on it
-    p_deposit->show();
-    p_deposit->p_timer->start(1000);
+    p_deposit->show_ui(info.account_num, info.balance, name);
     stop_timer();
     this->hide();
 }
@@ -28,7 +30,7 @@ void deposit_instructions::deposit_done() {  // Shows this.ui with new informati
     if (p_deposit->sum != 0.0f) {
         p_rest->add_transaction(p_id->account_id, p_deposit->sum);
         new_balance = p_deposit->sum + info.balance;
-        ui->Balance->setText(QString().setNum(new_balance));
+        ui->Balance->setText(QString().setNum(new_balance, 'f', 2));
         p_rest->set_new_balance(p_id->account_id, new_balance);
     }
 
@@ -63,6 +65,7 @@ void deposit_instructions::reset(ids_t *id) {  // Resets the uis
         "tallettaa, tai peruuta painamalla 'Sulje'");
     ui->start->show();
     p_rest->get_account_info(p_id->account_id);
+    p_rest->get_customer_info(p_id->customer_id);
     this->show();
 }
 
@@ -71,10 +74,13 @@ void deposit_instructions::on_Close_clicked() {
     this->hide();
 }
 
-void deposit_instructions::update_balance(account_info_t info) {
+void deposit_instructions::set_account_info(account_info_t info) {
     this->info = info;
     ui->Bank_account_num->setText(info.account_num);
-    ui->Balance->setText(QString().setNum(info.balance));
-    p_deposit->account_num = info.account_num;
-    p_deposit->balance = info.balance;
+    ui->Balance->setText(QString().setNum(info.balance, 'f', 2));
+}
+
+void deposit_instructions::set_customer_info(customer_info_t info) {
+    name = info.first_name + " " + info.last_name;
+    ui->User_name->setText(name);
 }

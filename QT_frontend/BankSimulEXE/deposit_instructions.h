@@ -25,18 +25,20 @@ private slots:
     void deposit_done();
     void timer();
     void on_Close_clicked();
-    void update_balance(account_info_t info);
+    void set_account_info(account_info_t info);
+    void set_customer_info(customer_info_t);
 
 private:
     Ui::deposit_instructions *ui;
     deposit *p_deposit;
-    int time = 10;
     QTimer *p_timer;
-    void stop_timer();
     dll_rest_api *p_rest;
-    double new_balance;
     ids_t *p_id;
     account_info_t info;
+    QString name;
+    int time = 10;
+    double new_balance;
+    void stop_timer();
 };
 
 #endif  // DEPOSIT_INSTRUCTIONS_H

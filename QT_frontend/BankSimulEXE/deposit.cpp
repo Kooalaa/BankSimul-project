@@ -6,8 +6,7 @@ deposit::deposit(QWidget *parent) : QDialog(parent), ui(new Ui::deposit) {
     p_timer = new QTimer;
     ui->setupUi(this);
     // clang-format off
-    connect(ui->num_pad, SIGNAL(buttonClicked(QAbstractButton*)), this,
-            SLOT(handle_buttons(QAbstractButton*)));
+    connect(ui->num_pad, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(handle_buttons(QAbstractButton*)));
     // clang-format on
     sum = 0.0f;
 }
@@ -15,6 +14,14 @@ deposit::deposit(QWidget *parent) : QDialog(parent), ui(new Ui::deposit) {
 deposit::~deposit() { delete ui; }
 
 void deposit::reset_sum() { ui->lineEdit->setText(""); }
+
+void deposit::show_ui(QString account_num, double balance, QString name) {
+    p_timer->start(1000);
+    ui->Balance->setText(QString().setNum(balance, 'f', 2));
+    ui->Bank_account_num->setText(account_num);
+    ui->User_name->setText(name);
+    this->show();
+}
 
 void deposit::timer() {
     ui->Time->setNum(time);
@@ -27,7 +34,6 @@ void deposit::timer() {
 
 void deposit::handle_buttons(QAbstractButton *button) {
     stop_timer();
-    p_timer->start();
     QString temp = ui->lineEdit->text();
     QStringList list = temp.split(".");
     if (list.size() > 1) {
@@ -36,6 +42,7 @@ void deposit::handle_buttons(QAbstractButton *button) {
         }
     }
     ui->lineEdit->setText(ui->lineEdit->text() + button->text());
+    p_timer->start();
 }
 
 void deposit::on_pushButton_12_clicked() {

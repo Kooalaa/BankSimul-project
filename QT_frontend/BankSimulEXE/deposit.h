@@ -18,8 +18,7 @@ public:
     void reset_sum();
     QTimer *p_timer;
     double sum;
-    QString account_num;
-    double balance;
+    void show_ui(QString, double, QString);
 signals:
     void ready();
 private slots:

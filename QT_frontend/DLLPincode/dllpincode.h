@@ -16,12 +16,14 @@ public:
 
 signals:
     void send_pin(QByteArray);
-
+    void locked();
 public slots:
     void Wrong_PIN(int attempts);
     void Locked_card();
     void Logged_in();
     void get_pin(QByteArray);
+private slots:
+    void log_out();
 
 private:
     Dialog *p_dialog;
