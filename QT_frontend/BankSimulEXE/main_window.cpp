@@ -11,6 +11,7 @@ Main_window::Main_window(QWidget *parent) : QDialog(parent), ui(new Ui::Main_win
     p_browse = new browse_transactions();
     p_balance = new balance();
     p_rest = new dll_rest_api();
+    p_ids = new ids_t;
 
     connect(p_timer, SIGNAL(timeout()), this, SLOT(timer()));
     connect(p_rest, SIGNAL(info_ready(account_info_t)), this,
@@ -36,10 +37,9 @@ Main_window::~Main_window() {
     p_ids = nullptr;
 }
 
-void Main_window::set_ids(ids_t ids) {
-    p_ids = new ids_t;
-    (*p_ids) = ids;
-}
+void Main_window::set_ids(ids_t ids) { (*p_ids) = ids; }
+
+void Main_window::set_card_num(const int64_t &card_num) { this->card_num = card_num; }
 
 void Main_window::show_ui() {
     p_timer->start(1000);

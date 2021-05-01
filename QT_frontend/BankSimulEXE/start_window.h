@@ -30,6 +30,7 @@ private:
     Main_window *p_main_window;
     dll_rest_api *p_rest;
     DLLSerialPort *p_serial_port;
+    dll_mobile_login *p_mobile;
 
 private slots:
     void logged_in(ids_t ids);
@@ -37,7 +38,10 @@ private slots:
     void card_inserted(QString num);
     void get_status(bool locked);
     void logout();
+
+    // Mobile login slots:
     void logged_in(ids_t ids, int64_t card_num);
+    void cancel_login();
     void on_mobile_btn_clicked();
 };
 #endif  // START_WINDOW_H
