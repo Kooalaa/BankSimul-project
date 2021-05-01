@@ -10,7 +10,7 @@ start_window::start_window(QWidget *parent) : QMainWindow(parent), ui(new Ui::st
     p_main_window = new Main_window;
     p_rest = new dll_rest_api;
 
-    connect(p_rest, &dll_rest_api::logged_in, this, &start_window::logged_in);
+    connect(p_rest, &dll_rest_api::logged_in, this, qOverload<ids_t>(&start_window::logged_in));
     connect(p_rest, &dll_rest_api::status_ready, this, &start_window::get_status);
     connect(p_main_window, &Main_window::logout, this, &start_window::logout);
 
@@ -71,3 +71,7 @@ void start_window::logout() {
 
     p_serial_port->read_card();
 }
+
+void start_window::logged_in(ids_t ids, int64_t card_num) { p_main_window->set_ids(ids); }
+
+void start_window::on_mobile_btn_clicked() {}

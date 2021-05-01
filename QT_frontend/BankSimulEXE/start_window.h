@@ -1,6 +1,7 @@
 #ifndef START_WINDOW_H
 #define START_WINDOW_H
 
+#include <dll_mobile_login.h>
 #include <dll_rest_api.h>
 #include <dllpincode.h>
 #include <dllserialport.h>
@@ -36,5 +37,7 @@ private slots:
     void card_inserted(QString num);
     void get_status(bool locked);
     void logout();
+    void logged_in(ids_t ids, int64_t card_num);
+    void on_mobile_btn_clicked();
 };
 #endif  // START_WINDOW_H

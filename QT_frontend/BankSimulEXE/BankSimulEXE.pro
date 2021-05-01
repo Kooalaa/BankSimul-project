@@ -1,4 +1,5 @@
-QT       += core gui network serialport
+QT += core gui serialport
+QT += network svg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -65,3 +66,9 @@ win32: LIBS += -L$$PWD/../build-DLLSerialPort-Desktop_Qt_5_15_2_MinGW_64_bit-Deb
 
 INCLUDEPATH += $$PWD/../DLLSerialPort
 DEPENDPATH += $$PWD/../DLLSerialPort
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build-DLLMobileLogin-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/release/ -lDLLMobileLogin
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build-DLLMobileLogin-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/ -lDLLMobileLogin
+
+INCLUDEPATH += $$PWD/../DLLMobileLogin
+DEPENDPATH += $$PWD/../DLLMobileLogin

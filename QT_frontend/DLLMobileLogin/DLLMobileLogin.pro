@@ -20,6 +20,7 @@ HEADERS += \
     DLLMobileLogin_global.h \
     QR-Code-generator/cpp/QrCode.hpp \
     dll_mobile_login.h \
+    ids_t.h \
     network_handler.h \
     qr_display.h \
     qr_mobile_token.h
