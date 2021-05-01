@@ -10,8 +10,16 @@ const error = {
     ER_DUP_ENTRY: 1062
 };
 
+/**
+ * Status is used for syncing login request with mobiles reponse request.
+ * 
+ * @constant status
+ */
 const status = new Subject();
 
+/**
+ * Request hndler for geting new token for mobile login
+ */
 router.get('/atm', async (_req, res) => {
     var token = base64url(randomBytes(32));
     do {
@@ -21,11 +29,6 @@ router.get('/atm', async (_req, res) => {
                 (err, db_result) => {
                     if (err) reject(err);
                     else resolve(db_result);
-
-                    /*res.json({
-                        db: db_result,
-                        token: token
-                    });*/
                 }
             );
         });
@@ -44,6 +47,9 @@ router.get('/atm', async (_req, res) => {
     } while (retry);
 });
 
+/**
+ * Request handler for geting atm_token status.
+ */
 router.get('/mobile/:atm_token?', (req, res) => {
     if (req.params.atm_token) {
         mobile.get_status(req.params.atm_token,
@@ -59,6 +65,9 @@ router.get('/mobile/:atm_token?', (req, res) => {
     res.status(404).json({ error: "No atm token provided" });
 });
 
+/**
+ * Request handler for login in to account
+ */
 router.get('/login/:atm_token', (req, res) => {
     if (!req.params.atm_token) res.status(400).json({ error: "No atm token", status: 400 });
     mobile.get_status(req.params.atm_token,
@@ -74,6 +83,11 @@ router.get('/login/:atm_token', (req, res) => {
                     card_num: ""
                 };
 
+                /**
+                 * Remove pending request if timeout is reached.
+                 * 
+                 * @constant timeout
+                 */
                 const timeout = setTimeout((res) => {
                     res.status(504).json({
                         error: "Didnt get response",
@@ -88,7 +102,12 @@ router.get('/login/:atm_token', (req, res) => {
                     subscription.unsubscribe();
                 }, 15000, res);
 
-                var subscription = status.subscribe({
+                /**
+                 * Subscription to wait for geting response from mobile client or cancellation request from atm
+                 * 
+                 * @constant subscription
+                 */
+                const subscription = status.subscribe({
                     next: (atm_token) => {
                         console.log(atm_token);
                         if (atm_token.token != req.params.atm_token) return;
@@ -136,6 +155,9 @@ router.get('/login/:atm_token', (req, res) => {
     );
 });
 
+/**
+ * 
+ */
 router.get('/:atm_token', (req, res) => {
     mobile.get_status(req.params.atm_token,
         (err, db_result) => {
