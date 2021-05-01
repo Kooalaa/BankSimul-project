@@ -19,8 +19,8 @@ public:
     void get_atm_token();
     void try_login(QString atm_token);
     void try_login();
-    void get_or_generate_mobile_token(int account_id);
-    void generate_new_mobile_token(int account_id);
+    void get_or_generate_mobile_token(int card_id);
+    void generate_new_mobile_token(int card_id);
 
     ids_t get_ids() const;
 

@@ -46,12 +46,10 @@ void network_handler::try_login(QString atm_token) {
 
         QJsonObject obj = get_json_obj(reply);
         if (obj["status"].toInt()) {
-            ids_t ids;
             QJsonObject ids_obj = obj["ids"].toObject();
 
-            ids.card_id = ids_obj["card_id"].toInt();
-            ids.account_id = ids_obj["account_id"].toInt();
-            ids.customer_id = ids_obj["customer_id"].toInt();
+            ids_t ids = {ids_obj["card_id"].toInt(), ids_obj["account_id"].toInt(),
+                         ids_obj["customer_id"].toInt()};
             int64_t card_num = obj["card_num"].toDouble();
 
             emit logged_in(ids, card_num);
@@ -63,8 +61,8 @@ void network_handler::try_login(QString atm_token) {
 }
 
 // Get the mobile token from databes or if no token exist get a new one.
-void network_handler::request_mobile_token(int account_id) {
-    QString site_url = "http://astru.ddns.net:8080/mobile/token/" + QString().setNum(account_id);
+void network_handler::request_mobile_token(int card_id) {
+    QString site_url = "http://astru.ddns.net:8080/mobile/token/" + QString().setNum(card_id);
 
     QNetworkRequest request(site_url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -75,9 +73,8 @@ void network_handler::request_mobile_token(int account_id) {
 }
 
 // Get a new mobile token.
-void network_handler::request_new_mobile_token(int account_id) {
-    QString site_url =
-        "http://astru.ddns.net:8080/mobile/new_token/" + QString().setNum(account_id);
+void network_handler::request_new_mobile_token(int card_id) {
+    QString site_url = "http://astru.ddns.net:8080/mobile/new_token/" + QString().setNum(card_id);
 
     QNetworkRequest request(site_url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");

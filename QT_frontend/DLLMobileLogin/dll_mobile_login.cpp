@@ -26,6 +26,7 @@ dll_mobile_login::~dll_mobile_login() {
     delete p_mobile_display;
 }
 
+// Start full login process.
 void dll_mobile_login::login() {
     callback.append(&dll_mobile_login::try_login);
     get_atm_token();
@@ -35,11 +36,11 @@ void dll_mobile_login::login() {
 void dll_mobile_login::get_atm_token() { p_network->request_token(); }
 void dll_mobile_login::try_login(QString atm_token) { p_network->try_login(atm_token); }
 void dll_mobile_login::try_login() { p_network->try_login(atm_token); }
-void dll_mobile_login::get_or_generate_mobile_token(int account_id) {
-    p_network->request_mobile_token(account_id);
+void dll_mobile_login::get_or_generate_mobile_token(int card_id) {
+    p_network->request_mobile_token(card_id);
 }
-void dll_mobile_login::generate_new_mobile_token(int account_id) {
-    p_network->request_new_mobile_token(account_id);
+void dll_mobile_login::generate_new_mobile_token(int card_id) {
+    p_network->request_new_mobile_token(card_id);
 }
 
 // Getters:

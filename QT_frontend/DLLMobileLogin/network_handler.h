@@ -20,6 +20,11 @@ struct ids_t {
         account_id = init;
         card_id = init;
     }
+    ids_t(int customer_id, int account_id, int card_id) {
+        this->customer_id = customer_id;
+        this->account_id = account_id;
+        this->card_id = card_id;
+    }
 
     void operator=(int init) {
         customer_id = init;
@@ -35,8 +40,8 @@ public:
     ~network_handler();
     void request_token();
     void try_login(QString atm_token);
-    void request_mobile_token(int account_id);
-    void request_new_mobile_token(int account_ids);
+    void request_mobile_token(int card_id);
+    void request_new_mobile_token(int card_id);
     void cancel_login_request(QString atm_token);
 
 private:
