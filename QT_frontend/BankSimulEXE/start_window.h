@@ -29,6 +29,7 @@ private:
     Main_window *p_main_window;
     dll_rest_api *p_rest;
     DLLSerialPort *p_serial_port;
+    long long card_num;
 
 private slots:
     void logged_in(ids_t ids);

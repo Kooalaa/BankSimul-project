@@ -13,6 +13,7 @@ SOURCES += \
     browse_transactions.cpp \
     deposit.cpp \
     deposit_instructions.cpp \
+    graphical_transaction_view.cpp \
     main.cpp \
     main_window.cpp \
     start_window.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     browse_transactions.h \
     deposit.h \
     deposit_instructions.h \
+    graphical_transaction_view.h \
     main_window.h \
     start_window.h \
     withdraw.h \
@@ -36,6 +38,7 @@ FORMS += \
     browse_transactions.ui \
     deposit.ui \
     deposit_instructions.ui \
+    graphical_transaction_view.ui \
     main_window.ui \
     start_window.ui \
     withdraw.ui \

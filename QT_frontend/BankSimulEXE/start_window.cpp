@@ -42,18 +42,15 @@ void start_window::logged_in(ids_t ids) {
     p_main_window->show();
 }
 
-void start_window::pin_received(QByteArray hash) {
-    long long card_num = 21488175058;
-    p_rest->login(hash, card_num);
-}
+void start_window::pin_received(QByteArray hash) { p_rest->login(hash, card_num); }
 
 void start_window::card_inserted(QString num) {  // Showing the DLLPincode ui when card is inserted
     num.remove("\r\n-");
     num.remove("\r\n>");
     qDebug() << num.toULongLong(nullptr, 16);
+    card_num = num.toLongLong(nullptr, 16);
 
-    p_main_window->set_ids(1);
-    p_rest->get_card_status(num.toLongLong(nullptr, 16));
+    p_rest->get_card_status(card_num);
 }
 
 void start_window::get_status(bool locked) {
