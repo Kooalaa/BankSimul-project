@@ -11,7 +11,7 @@ network_handler::~network_handler() {
 
 // Request a new atm_token from the server.
 void network_handler::request_token() {
-    QString site_url = "http://astru.ddns.net:8080/mobile/atm";
+    QString site_url = base_url + "/mobile/atm";
 
     QNetworkRequest request(site_url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -28,7 +28,7 @@ void network_handler::request_token() {
 
 // Try to login and wait for response before cancelling.
 void network_handler::try_login(QString atm_token) {
-    QString site_url = "http://astru.ddns.net:8080/mobile/login/" + atm_token;
+    QString site_url = base_url + "/mobile/login/" + atm_token;
 
     QNetworkRequest request(site_url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -62,7 +62,7 @@ void network_handler::try_login(QString atm_token) {
 
 // Get the mobile token from databes or if no token exist get a new one.
 void network_handler::request_mobile_token(int card_id) {
-    QString site_url = "http://astru.ddns.net:8080/mobile/token/" + QString().setNum(card_id);
+    QString site_url = base_url + "/mobile/token/" + QString().setNum(card_id);
 
     QNetworkRequest request(site_url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -74,7 +74,7 @@ void network_handler::request_mobile_token(int card_id) {
 
 // Get a new mobile token.
 void network_handler::request_new_mobile_token(int card_id) {
-    QString site_url = "http://astru.ddns.net:8080/mobile/new_token/" + QString().setNum(card_id);
+    QString site_url = base_url + "/mobile/new_token/" + QString().setNum(card_id);
 
     QNetworkRequest request(site_url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -86,7 +86,7 @@ void network_handler::request_new_mobile_token(int card_id) {
 
 // Cancel the login request
 void network_handler::cancel_login_request(QString atm_token) {
-    QString site_url = "http://astru.ddns.net:8080/mobile/cancel/" + atm_token;
+    QString site_url = base_url + "/mobile/cancel/" + atm_token;
 
     QNetworkRequest request(site_url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");

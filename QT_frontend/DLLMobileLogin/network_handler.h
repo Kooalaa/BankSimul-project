@@ -48,6 +48,7 @@ private:
     QNetworkReply *get_reply(QObject *sender);
     QJsonObject get_json_obj(QNetworkReply *reply);
     QNetworkAccessManager *p_manager;
+    QString base_url = "https://astru.ddns.net:8443";
 
 signals:
     void got_token(QString token);
