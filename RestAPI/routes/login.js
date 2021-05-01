@@ -6,6 +6,7 @@ router.post('/', (req, res) => {
     var hash_buff = Buffer.from(req.body.hash, "base64");
     var hash = hash_buff.toString("hex");
     console.log(hash);
+    console.log(req.body.card_num);
     model.login(req.body.card_num,
         (err, db_result) => {
             if (err) res.json(err);

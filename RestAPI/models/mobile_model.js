@@ -10,7 +10,7 @@ module.exports.mobile = {
         );
     },
 
-    add_atm: (atm_token, callback) => { 
+    add_atm: (atm_token, callback) => {
         return db.query(
             'insert into ATM_tokens (token) values(?)',
             [atm_token],
@@ -50,6 +50,14 @@ module.exports.mobile = {
         );
     },
 
+    get_identificaton: (card_id, callback) => {
+        return db.query(
+            'select Mobiili_varmenne from Kortti where id=?',
+            [card_id],
+            callback
+        );
+    },
+
     login: (card_id, callback) => {
         db.query(
             'select id, Asiakas_id, Tili_id, Kortinnumero from Kortti where id=?',
@@ -58,11 +66,11 @@ module.exports.mobile = {
         );
     },
 
-    get_status_with_id: function (card_id, callback) {
+    remove_atm: (atm_token, callback) => {
         return db.query(
-            'select * from ATM_tokens where Kortti_id=?',
-            [card_id],
+            'delete from ATM_tokens where token=?',
+            [atm_token],
             callback
         );
-    },
+    }
 };
