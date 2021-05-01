@@ -13,14 +13,16 @@ SOURCES += \
     QR-Code-generator/cpp/QrCode.cpp \
     dll_mobile_login.cpp \
     network_handler.cpp \
-    qr_display.cpp
+    qr_display.cpp \
+    qr_mobile_token.cpp
 
 HEADERS += \
     DLLMobileLogin_global.h \
     QR-Code-generator/cpp/QrCode.hpp \
     dll_mobile_login.h \
     network_handler.h \
-    qr_display.h
+    qr_display.h \
+    qr_mobile_token.h
 
 # Default rules for deployment.
 unix {
@@ -29,4 +31,5 @@ unix {
 !isEmpty(target.path): INSTALLS += target
 
 FORMS += \
-    qr_display.ui
+    qr_display.ui \
+    qr_mobile_token.ui

@@ -1,5 +1,5 @@
-#ifndef QR_DISPLAY_H
-#define QR_DISPLAY_H
+#ifndef QR_MOBILE_TOKEN_H
+#define QR_MOBILE_TOKEN_H
 
 #include <QDialog>
 #include <QGraphicsSvgItem>
@@ -10,32 +10,32 @@
 #include "QR-Code-generator/cpp/QrCode.hpp"
 
 namespace Ui {
-class QR_display;
+class qr_mobile_token;
 }
 
-class QR_display : public QDialog {
+class QR_mobile_token : public QDialog {
     Q_OBJECT
 
 public:
-    explicit QR_display(QWidget *parent = nullptr);
-    ~QR_display();
+    explicit QR_mobile_token(QWidget *parent = nullptr);
+    ~QR_mobile_token();
     void start(QString token);
-    void stop();
 
 private:
-    Ui::QR_display *ui;
+    Ui::qr_mobile_token *ui;
     QGraphicsScene *p_scene;
-    QSvgRenderer *p_renderer;
     QXmlStreamReader *p_svg_reader;
+    QSvgRenderer *p_renderer;
     QGraphicsSvgItem *p_svg_item;
     QTimer *p_timer;
     int time;
 
 signals:
-    void cancel_login();
+    void request_new_token();
 
 private slots:
-    void on_cancel_btn_clicked();
+    void on_generate_btn_clicked();
+    void on_close_btn_clicked();
 };
 
-#endif  // QR_DISPLAY_H
+#endif  // QR_MOBILE_TOKEN_H

@@ -62,6 +62,57 @@ void network_handler::try_login(QString atm_token) {
     });
 }
 
+// Get the mobile token from databes or if no token exist get a new one.
+void network_handler::request_mobile_token(int account_id) {
+    QString site_url = "http://astru.ddns.net:8080/mobile/token/" + QString().setNum(account_id);
+
+    QNetworkRequest request(site_url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QNetworkReply *reply = p_manager->put(request, QJsonDocument().toJson());
+
+    connect(reply, &QNetworkReply::finished, this, &network_handler::handle_token_response);
+}
+
+// Get a new mobile token.
+void network_handler::request_new_mobile_token(int account_id) {
+    QString site_url =
+        "http://astru.ddns.net:8080/mobile/new_token/" + QString().setNum(account_id);
+
+    QNetworkRequest request(site_url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QNetworkReply *reply = p_manager->put(request, QJsonDocument().toJson());
+
+    connect(reply, &QNetworkReply::finished, this, &network_handler::handle_token_response);
+}
+
+// Cancel the login request
+void network_handler::cancel_login_request(QString atm_token) {
+    QString site_url = "http://astru.ddns.net:8080/mobile/cancel/" + atm_token;
+
+    QNetworkRequest request(site_url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QNetworkReply *reply = p_manager->deleteResource(request);
+
+    connect(reply, &QNetworkReply::finished, this, [this] {
+        QNetworkReply *reply = get_reply(sender());
+        qDebug() << get_json_obj(reply);
+        reply->deleteLater();
+    });
+}
+
+void network_handler::handle_token_response() {
+    QNetworkReply *reply = get_reply(sender());
+    QJsonObject obj = get_json_obj(reply);
+
+    QString token = obj["token"].toString();
+    emit got_mobile_token(token);
+
+    reply->deleteLater();
+}
+
 // Helper functions.
 // Helper to get reply pointer.
 QNetworkReply *network_handler::get_reply(QObject *sender) {

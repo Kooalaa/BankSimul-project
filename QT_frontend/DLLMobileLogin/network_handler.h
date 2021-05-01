@@ -35,6 +35,9 @@ public:
     ~network_handler();
     void request_token();
     void try_login(QString atm_token);
+    void request_mobile_token(int account_id);
+    void request_new_mobile_token(int account_ids);
+    void cancel_login_request(QString atm_token);
 
 private:
     QNetworkReply *get_reply(QObject *sender);
@@ -45,6 +48,10 @@ signals:
     void got_token(QString token);
     void logged_in(ids_t ids, int64_t card_num);
     void cancel_login();
+    void got_mobile_token(QString mobile_token);
+
+private slots:
+    void handle_token_response();
 };
 
 #endif  // NETWORK_HANDLER_H

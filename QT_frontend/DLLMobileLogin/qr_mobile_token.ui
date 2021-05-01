@@ -1,37 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QR_display</class>
- <widget class="QDialog" name="QR_display">
+ <class>qr_mobile_token</class>
+ <widget class="QDialog" name="qr_mobile_token">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>408</width>
-    <height>464</height>
+    <width>670</width>
+    <height>726</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>408</width>
-    <height>459</height>
+    <width>670</width>
+    <height>726</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>Kirjautumis avain</string>
+   <string>Mobiili varmenne</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QGraphicsView" name="graphicsView">
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Sunken</enum>
-     </property>
-    </widget>
+    <widget class="QGraphicsView" name="graphicsView"/>
    </item>
    <item>
     <widget class="QLabel" name="token">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="font">
       <font>
        <pointsize>10</pointsize>
@@ -41,7 +40,7 @@
       <enum>QFrame::Box</enum>
      </property>
      <property name="text">
-      <string>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</string>
+      <string>XXXXXXXXXXX</string>
      </property>
     </widget>
    </item>
@@ -49,6 +48,12 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLabel" name="time">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -58,7 +63,7 @@
         <enum>QFrame::Box</enum>
        </property>
        <property name="text">
-        <string>15</string>
+        <string>10</string>
        </property>
       </widget>
      </item>
@@ -76,20 +81,26 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="cancel_btn">
+      <widget class="QPushButton" name="generate_btn">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Cancel</string>
+        <string>Luo uusi token</string>
        </property>
-       <property name="default">
-        <bool>false</bool>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="close_btn">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
-       <property name="flat">
-        <bool>false</bool>
+       <property name="text">
+        <string>Sulje</string>
        </property>
       </widget>
      </item>

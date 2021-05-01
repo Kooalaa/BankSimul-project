@@ -1,8 +1,8 @@
-#include "qr_display.h"
+#include "qr_mobile_token.h"
 
-#include "ui_qr_display.h"
+#include "ui_qr_mobile_token.h"
 
-QR_display::QR_display(QWidget *parent) : QDialog(parent), ui(new Ui::QR_display) {
+QR_mobile_token::QR_mobile_token(QWidget *parent) : QDialog(parent), ui(new Ui::qr_mobile_token) {
     ui->setupUi(this);
     p_timer = new QTimer;
 
@@ -18,22 +18,23 @@ QR_display::QR_display(QWidget *parent) : QDialog(parent), ui(new Ui::QR_display
     connect(p_timer, &QTimer::timeout, this, [this] {
         ui->time->setNum(--time);
         if (time == 0) {
-            this->stop();
+            time = 10;
+            this->on_close_btn_clicked();
         }
     });
 }
 
-QR_display::~QR_display() {
+QR_mobile_token::~QR_mobile_token() {
     delete ui;
     delete p_scene;
     delete p_renderer;
     delete p_svg_reader;
 }
 
-void QR_display::start(QString token) {
+void QR_mobile_token::start(QString token) {
     this->show();
     p_timer->start(1000);
-    time = 15;
+    time = 10;
     ui->time->setNum(time);
     ui->token->setText(token);
 
@@ -49,13 +50,9 @@ void QR_display::start(QString token) {
     ui->graphicsView->fitInView(p_svg_item, Qt::KeepAspectRatio);
 }
 
-void QR_display::stop() {
-    p_timer->stop();
-    this->close();
-}
+void QR_mobile_token::on_generate_btn_clicked() { emit request_new_token(); }
 
-void QR_display::on_cancel_btn_clicked() {
-    emit cancel_login();
+void QR_mobile_token::on_close_btn_clicked() {
     p_timer->stop();
     this->close();
 }
