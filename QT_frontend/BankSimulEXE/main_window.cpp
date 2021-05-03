@@ -79,6 +79,7 @@ void Main_window::timer() {
     time--;
     if (time < 0) {
         stop_timer();
+        emit logout();
     }
 }
 
