@@ -1,6 +1,7 @@
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
 
+#include <dll_mobile_login.h>
 #include <dll_rest_api.h>
 
 #include <QDialog>
@@ -24,18 +25,26 @@ public:
     void show_ui();
 
 private:
+    // Auto generated
     Ui::Main_window *ui;
+
+    // Pointers:
+    dll_rest_api *p_rest;
+    dll_mobile_login *p_mobile;
     withdraw *p_withdraw;
     browse_transactions *p_browse;
     balance *p_balance;
     deposit_instructions *p_deposit_instruct;
-    ids_t *p_ids;
     QTimer *p_timer;
-    dll_rest_api *p_rest;
-    void stop_timer();
+    ids_t *p_ids;
+
+    // Variables
     int time = 30;
     QString name;
     int64_t card_num;
+
+    // Functions
+    void stop_timer();
 
 signals:
     void logout();
@@ -50,6 +59,7 @@ private slots:
     void show_with_timer();
     void set_account_info(account_info_t);
     void set_customer_info(customer_info_t);
+    void on_mobile_login_btn_clicked();
 };
 
 #endif  // MAIN_WINDOW_H

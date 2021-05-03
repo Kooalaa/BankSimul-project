@@ -41,7 +41,6 @@ private slots:
 
     // Mobile login slots:
     void logged_in(ids_t ids, int64_t card_num);
-    void cancel_login();
     void on_mobile_btn_clicked();
 };
 #endif  // START_WINDOW_H
