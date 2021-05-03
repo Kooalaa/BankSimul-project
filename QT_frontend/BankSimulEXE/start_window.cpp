@@ -9,8 +9,12 @@ start_window::start_window(QWidget *parent) : QMainWindow(parent), ui(new Ui::st
     p_pincode = new DLLPincode;
     p_main_window = new Main_window;
     p_rest = new dll_rest_api;
+    p_mobile = new dll_mobile_login;
 
-    connect(p_rest, &dll_rest_api::logged_in, this, &start_window::logged_in);
+    connect(p_mobile, &dll_mobile_login::logged_in, this,
+            qOverload<ids_t, int64_t>(&start_window::logged_in));
+    connect(p_mobile, &dll_mobile_login::cancel_login, this, &start_window::cancel_login);
+    connect(p_rest, &dll_rest_api::logged_in, this, qOverload<ids_t>(&start_window::logged_in));
     connect(p_rest, &dll_rest_api::status_ready, this, &start_window::get_status);
     connect(p_main_window, &Main_window::logout, this, &start_window::logout);
 
@@ -35,10 +39,11 @@ start_window::~start_window() {
     p_main_window = nullptr;
     delete p_serial_port;
     delete p_rest;
-    p_rest = nullptr;
+    delete p_mobile;
 }
 
 void start_window::logged_in(ids_t ids) {
+    p_main_window->set_card_num(0);
     p_main_window->set_ids(ids);
     p_main_window->show_ui();
 }
@@ -68,3 +73,14 @@ void start_window::logout() {
 
     p_serial_port->read_card();
 }
+
+void start_window::logged_in(ids_t ids, int64_t card_num) {
+    p_main_window->set_card_num(card_num);
+    p_main_window->set_ids(ids);
+    p_main_window->show_ui();
+    this->close();
+}
+
+void start_window::cancel_login() {}
+
+void start_window::on_mobile_btn_clicked() { p_mobile->login(); }

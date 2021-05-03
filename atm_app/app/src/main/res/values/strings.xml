@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">atm_app</string>
     <string name="login_warning">Do you want to login</string>
+    <string name="login">Login</string>
+    <string name="scanned_token">Scanned token</string>
+    <string name="mobile_token">Mobile token</string>
 </resources>

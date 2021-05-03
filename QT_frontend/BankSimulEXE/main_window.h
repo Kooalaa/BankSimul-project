@@ -20,6 +20,7 @@ public:
     explicit Main_window(QWidget *parent = nullptr);
     ~Main_window();
     void set_ids(ids_t ids);
+    void set_card_num(const int64_t &card_num);
     void show_ui();
 
 private:
@@ -34,6 +35,7 @@ private:
     void stop_timer();
     int time = 30;
     QString name;
+    int64_t card_num;
 
 signals:
     void logout();

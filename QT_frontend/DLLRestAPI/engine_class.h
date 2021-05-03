@@ -7,25 +7,7 @@
 #include <QVector>
 #include <QtNetwork>
 
-// Struct to package ids for easier transportasion over functions
-struct ids_t {
-    int customer_id;
-    int account_id;
-    int card_id;
-
-    ids_t() {}
-    ids_t(int init) {
-        customer_id = init;
-        account_id = init;
-        card_id = init;
-    }
-
-    void operator=(int init) {
-        customer_id = init;
-        account_id = init;
-        card_id = init;
-    }
-};
+#include "ids_t.h"
 
 // Struct to package transactions data for easier transportasion over functions
 struct transaction_t {

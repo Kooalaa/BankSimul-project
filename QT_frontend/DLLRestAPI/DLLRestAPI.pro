@@ -17,7 +17,8 @@ SOURCES += \
 HEADERS += \
     DLLRestAPI_global.h \
     dll_rest_api.h \
-    engine_class.h
+    engine_class.h \
+    ids_t.h
 
 # Default rules for deployment.
 unix {
