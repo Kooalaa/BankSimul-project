@@ -28,6 +28,10 @@ private slots:
 
     void on_back_btn_clicked();
 
+    void reset_timer();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::browse_transactions *ui;
     ids_t *p_ids;
@@ -36,6 +40,8 @@ private:
     QTimer *p_timer;
     int time;
     int page = 0;
+    int page_num;
+    int pages;
 };
 
 #endif  // BROWSE_TRANSACTIONS_H

@@ -31,6 +31,7 @@ private:
     dll_rest_api *p_rest;
     DLLSerialPort *p_serial_port;
     dll_mobile_login *p_mobile;
+    long long card_num;
 
 private slots:
     void logged_in(ids_t ids);
