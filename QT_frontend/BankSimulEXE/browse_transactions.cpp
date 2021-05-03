@@ -10,6 +10,9 @@ browse_transactions::browse_transactions(QWidget *parent)
     p_rest = new dll_rest_api;
     ui->transactions_view->setSelectionMode(QAbstractItemView::NoSelection);
     ui->transactions_view->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    page_num = 1;
+    ui->page_label->setNum(page_num);
+    ui->back_btn->setEnabled(false);
 
     connect(p_timer, &QTimer::timeout, this, [this] {
         time -= 1;
@@ -47,13 +50,20 @@ browse_transactions::browse_transactions(QWidget *parent)
                     ui->transactions_view->setItem(i, 2, sum);
                 }
             });
+    connect(p_rest, &dll_rest_api::transactions_pages, this, [this](int pages) {
+        this->pages = pages;
+        ui->page_label->setText(QString().setNum(page_num) + "/" + QString().setNum(pages));
+    });
 }
 browse_transactions::~browse_transactions() {
     delete ui;
     delete p_timer;
     delete p_rest;
 }
-
+void browse_transactions::reset_timer() {
+    time = 30;
+    ui->time->setNum(time);
+}
 void browse_transactions::on_close_btn_clicked() {
     p_timer->stop();
     this->close();
@@ -78,14 +88,29 @@ void browse_transactions::transaction_menu(ids_t *ids, Main_window *main_wnd) {
     p_rest->get_customer_info(p_ids->customer_id);
     p_rest->get_account_info(p_ids->account_id);
     p_rest->get_transactions(p_ids->account_id, 0);
+    p_rest->get_transactions_pages(p_ids->account_id);
     p_timer->start(1000);
     this->show();
 }
 
 void browse_transactions::on_forward_btn_clicked() {
+    reset_timer();
+    page_num++;
+    ui->page_label->setText(QString().setNum(page_num) + "/" + QString().setNum(pages));
+    ui->back_btn->setEnabled(true);
     p_rest->get_transactions(p_ids->account_id, ++page);
+    if (pages - 1 == page) ui->forward_btn->setEnabled(false);
 }
 
 void browse_transactions::on_back_btn_clicked() {
+    reset_timer();
+    page_num--;
+    ui->page_label->setText(QString().setNum(page_num) + "/" + QString().setNum(pages));
+    ui->forward_btn->setEnabled(true);
     p_rest->get_transactions(p_ids->account_id, --page);
+    if (0 == page) ui->back_btn->setEnabled(false);
+}
+
+void browse_transactions::on_pushButton_clicked() {
+    qDebug() << this->width() << "x" << this->height();
 }
