@@ -59,7 +59,7 @@ win32: LIBS += -L$$PWD/../build-DLLPincode-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/
 INCLUDEPATH += $$PWD/../DLLPincode
 DEPENDPATH += $$PWD/../DLLPincode
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build-DLLRestAPI-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/release/ -lDLLRestAPI
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build-DLLRestAPI-Desktop_Qt_5_15_2_MinGW_64_bit-Release/release/ -lDLLRestAPI
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build-DLLRestAPI-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/ -lDLLRestAPI
 
 INCLUDEPATH += $$PWD/../DLLRestAPI
@@ -70,7 +70,7 @@ win32: LIBS += -L$$PWD/../build-DLLSerialPort-Desktop_Qt_5_15_2_MinGW_64_bit-Deb
 INCLUDEPATH += $$PWD/../DLLSerialPort
 DEPENDPATH += $$PWD/../DLLSerialPort
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build-DLLMobileLogin-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/release/ -lDLLMobileLogin
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build-DLLMobileLogin-Desktop_Qt_5_15_2_MinGW_64_bit-Release/release/ -lDLLMobileLogin
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build-DLLMobileLogin-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/ -lDLLMobileLogin
 
 INCLUDEPATH += $$PWD/../DLLMobileLogin

@@ -14,21 +14,30 @@ public:
     dll_mobile_login(QObject *parent = nullptr);
     ~dll_mobile_login();
 
+    // Normal interface functions
     void login();
+    void get_or_generate_mobile_token(int card_id);
 
+    // Advance interface funktions
     void get_atm_token();
     void try_login(QString atm_token);
     void try_login();
-    void get_or_generate_mobile_token(int card_id);
     void generate_new_mobile_token(int card_id);
 
+    // Ids getter and setter
     ids_t get_ids() const;
+    void set_ids(const ids_t &value);
 
 private:
+    // Pointers
     QR_display *p_display;
     QR_mobile_token *p_mobile_display;
     network_handler *p_network;
+
+    // Callback list
     QList<void (dll_mobile_login::*)()> callback;
+
+    // Variables
     QString atm_token;
     QString mobile_token;
     ids_t ids;

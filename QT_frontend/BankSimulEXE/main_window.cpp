@@ -5,6 +5,7 @@
 Main_window::Main_window(QWidget *parent) : QDialog(parent), ui(new Ui::Main_window) {
     ui->setupUi(this);
     p_rest = new dll_rest_api;
+    p_mobile = new dll_mobile_login;
     p_timer = new QTimer;
     p_deposit_instruct = new deposit_instructions();
     p_withdraw = new withdraw();
@@ -37,7 +38,10 @@ Main_window::~Main_window() {
     p_ids = nullptr;
 }
 
-void Main_window::set_ids(ids_t ids) { (*p_ids) = ids; }
+void Main_window::set_ids(ids_t ids) {
+    (*p_ids) = ids;
+    p_mobile->set_ids(ids);
+}
 
 void Main_window::set_card_num(const int64_t &card_num) { this->card_num = card_num; }
 
@@ -61,8 +65,7 @@ void Main_window::on_Deposit_btn_clicked() {
 
 void Main_window::on_Show_balance_btn_clicked() {
     stop_timer();
-    // qDebug() << this->height() << "x" << this->width();
-    p_balance->init_and_show(p_ids, this);
+    p_balance->init_and_show(p_ids, card_num, this);
     this->hide();
 }
 
@@ -101,3 +104,7 @@ void Main_window::stop_timer() {
 }
 
 void Main_window::on_Log_out_btn_clicked() { emit logout(); }
+
+void Main_window::on_mobile_login_btn_clicked() {
+    p_mobile->get_or_generate_mobile_token(p_ids->card_id);
+}

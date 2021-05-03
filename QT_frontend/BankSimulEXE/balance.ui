@@ -45,7 +45,7 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="1" column="0">
         <widget class="QLabel" name="card_num_text">
          <property name="font">
           <font>
@@ -57,7 +57,7 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
+       <item row="1" column="1">
         <widget class="QLabel" name="card_num_label">
          <property name="font">
           <font>
@@ -72,7 +72,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
+       <item row="2" column="0">
         <widget class="QLabel" name="balance_text">
          <property name="font">
           <font>
@@ -84,7 +84,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
+       <item row="2" column="1">
         <widget class="QLabel" name="balance_label">
          <property name="font">
           <font>
@@ -194,6 +194,11 @@
    </item>
    <item>
     <widget class="QTableWidget" name="transactions_view">
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
      <property name="showGrid">
       <bool>true</bool>
      </property>
@@ -217,6 +222,14 @@
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QLabel" name="time">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
        <property name="text">
         <string>10</string>
        </property>
@@ -224,6 +237,11 @@
      </item>
      <item>
       <spacer name="horizontalSpacer_2">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -237,6 +255,11 @@
      </item>
      <item>
       <widget class="QPushButton" name="logout_btn">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Kirjaudu ulos</string>
        </property>
@@ -244,6 +267,11 @@
      </item>
      <item>
       <widget class="QPushButton" name="close_btn">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Sulje</string>
        </property>
