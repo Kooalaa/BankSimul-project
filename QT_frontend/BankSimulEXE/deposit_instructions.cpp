@@ -11,7 +11,7 @@ deposit_instructions::deposit_instructions(QWidget *parent)
     p_timer = new QTimer;
     connect(p_deposit->p_timer, SIGNAL(timeout()), p_deposit, SLOT(timer()), Qt::DirectConnection);
     connect(p_timer, SIGNAL(timeout()), this, SLOT(timer()), Qt::DirectConnection);
-    connect(p_deposit, SIGNAL(ready()), this, SLOT(deposit_done()));
+    connect(p_deposit, SIGNAL(ready(int)), this, SLOT(deposit_done(int)));
     // clang-format off
     connect(p_rest, SIGNAL(info_ready(account_info_t)), this, SLOT(set_account_info(account_info_t)));
     connect(p_rest, SIGNAL(info_ready(customer_info_t)), this, SLOT(set_customer_info(customer_info_t)));
@@ -28,20 +28,22 @@ void deposit_instructions::on_start_clicked() {
 }
 
 // Shows this.ui with new information and ends the deposit operation
-void deposit_instructions::deposit_done() {
-    status = 0;
-    if (p_deposit->sum != 0.0f) {
-        p_rest->add_transaction(p_id->account_id, p_deposit->sum);
-        new_balance = p_deposit->sum + info.balance;
-        ui->Balance->setText(QString().setNum(new_balance, 'f', 2));
-        p_rest->set_new_balance(p_id->account_id, new_balance);
+void deposit_instructions::deposit_done(int _return) {
+    if (_return == 0) {
+        status = 0;
+        if (p_deposit->sum != 0.0f) {
+            p_rest->add_transaction(p_id->account_id, p_deposit->sum);
+            new_balance = p_deposit->sum + info.balance;
+            ui->Balance->setText(QString().setNum(new_balance, 'f', 2));
+            p_rest->set_new_balance(p_id->account_id, new_balance);
+        }
+        ui->label->setText("Talletus suoritettu");
+        ui->start->hide();
+        p_timer->start(1000);
+        this->show();
+    } else {
+        on_Close_clicked();
     }
-
-    qDebug() << "HERE";
-    p_timer->start(1000);
-    ui->label->setText("Talletus suoritettu");
-    ui->start->hide();
-    this->show();
 }
 
 // Timer setup
@@ -51,7 +53,6 @@ void deposit_instructions::timer() {
     if ((time == 0) && (status == 0)) {
         stop_timer();
         emit log_out();
-        this->close();
     } else if ((time == 0) && (status == 1)) {
         stop_timer();
         emit return_to_main();

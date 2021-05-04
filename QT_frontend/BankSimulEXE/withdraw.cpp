@@ -7,7 +7,6 @@ withdraw::withdraw(QWidget *parent) : QDialog(parent), ui(new Ui::withdraw) {
 
     // Pointer initialization
     p_error = new withdraw_error;
-    p_withdraw_done = new withdraw_done;
     timer = new QTimer;
     p_rest = new dll_rest_api;
 
@@ -25,8 +24,6 @@ withdraw::withdraw(QWidget *parent) : QDialog(parent), ui(new Ui::withdraw) {
 withdraw::~withdraw() {
     delete p_error;
     p_error = nullptr;
-    delete p_withdraw_done;
-    p_withdraw_done = nullptr;
     delete p_rest;
     p_rest = nullptr;
     delete timer;
@@ -34,8 +31,9 @@ withdraw::~withdraw() {
 }
 
 // Shows this ui, starts withdraw operation and gets account and customer ids as parameters
-void withdraw::show_ui(ids_t *id) {
+void withdraw::show_ui(ids_t *id, withdraw_done *p_withdraw_done) {
     p_id = id;
+    this->p_withdraw_done = p_withdraw_done;
     p_rest->get_account_info(id->account_id);    // Calls dll_rest_api function to emit a
                                                  // signal(info_ready(account_info_t))
     p_rest->get_customer_info(id->customer_id);  // Calls dll_rest_api function to emit a

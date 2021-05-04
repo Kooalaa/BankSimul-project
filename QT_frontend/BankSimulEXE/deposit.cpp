@@ -31,6 +31,7 @@ void deposit::timer() {
     time--;
     if (time < 0) {
         stop_timer();
+        emit ready(1);
         this->close();
     }
 }
@@ -68,7 +69,7 @@ void deposit::stop_timer() {
 void deposit::on_Ok_clicked() {
     stop_timer();
     sum = ui->lineEdit->text().toDouble();
-    emit ready();
+    emit ready(0);
     this->close();
 }
 
