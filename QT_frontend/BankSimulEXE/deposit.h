@@ -20,7 +20,7 @@ public:
     double sum;
     void show_ui(QString, double, QString);
 signals:
-    void ready();
+    void ready(int);
 private slots:
     void handle_buttons(QAbstractButton *button);
     void on_pushButton_12_clicked();

@@ -33,7 +33,6 @@ private:
     dll_mobile_login *p_mobile;
     long long card_num;
 
-
 private slots:
     void logged_in(ids_t ids);
     void pin_received(QByteArray hash);

@@ -19,11 +19,16 @@ Main_window::Main_window(QWidget *parent) : QDialog(parent), ui(new Ui::Main_win
             SLOT(set_account_info(account_info_t)));
     connect(p_rest, SIGNAL(info_ready(customer_info_t)), this,
             SLOT(set_customer_info(customer_info_t)));
-    connect(p_deposit_instruct, SIGNAL(log_out()), this, SLOT(on_Log_out_btn_clicked()));
-    connect(p_deposit_instruct, SIGNAL(return_to_main()), this, SLOT(return_to_main_slot()));
-    connect(p_withdraw, SIGNAL(return_to_main()), this, SLOT(return_to_main_slot()));
-    connect(p_withdraw_done, SIGNAL(return_to_main()), this, SLOT(return_to_main_slot()));
-    connect(p_withdraw_done, SIGNAL(log_out()), this, SLOT(on_Log_out_btn_clicked()));
+    connect(p_deposit_instruct, SIGNAL(log_out()), this, SLOT(on_Log_out_btn_clicked()),
+            Qt::DirectConnection);
+    connect(p_deposit_instruct, SIGNAL(return_to_main()), this, SLOT(return_to_main_slot()),
+            Qt::DirectConnection);
+    connect(p_withdraw, SIGNAL(return_to_main()), this, SLOT(return_to_main_slot()),
+            Qt::DirectConnection);
+    connect(p_withdraw_done, SIGNAL(return_to_main()), this, SLOT(return_to_main_slot()),
+            Qt::DirectConnection);
+    connect(p_withdraw_done, SIGNAL(log_out()), this, SLOT(on_Log_out_btn_clicked()),
+            Qt::DirectConnection);
 }
 
 Main_window::~Main_window() {
@@ -75,7 +80,7 @@ void Main_window::on_Show_balance_btn_clicked() {
 
 void Main_window::on_Withdraw_btn_clicked() {
     stop_timer();
-    p_withdraw->show_ui(p_ids);
+    p_withdraw->show_ui(p_ids, p_withdraw_done);
     this->hide();
 }
 

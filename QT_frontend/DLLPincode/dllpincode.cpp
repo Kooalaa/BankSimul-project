@@ -1,3 +1,4 @@
+
 #include "dllpincode.h"
 
 DLLPincode::DLLPincode(QObject *parent) : QObject(parent) {
@@ -39,4 +40,7 @@ void DLLPincode::Logged_in() { p_dialog->close(); }
 // Emits signal containing inserted pincode
 void DLLPincode::get_pin(QByteArray PIN) { emit send_pin(PIN); }
 
-void DLLPincode::log_out() { emit locked(); }
+void DLLPincode::log_out() {
+    p_dialog->close();
+    emit locked();
+}

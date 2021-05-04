@@ -23,7 +23,7 @@ signals:
     void return_to_main();
 private slots:
     void on_start_clicked();
-    void deposit_done();
+    void deposit_done(int);
     void timer();
     void on_Close_clicked();
     void set_account_info(account_info_t info);

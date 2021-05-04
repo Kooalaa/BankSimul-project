@@ -19,9 +19,10 @@ class withdraw : public QDialog {
 public:
     explicit withdraw(QWidget *parent = nullptr);
     ~withdraw();
-    void show_ui(ids_t *);
+    void show_ui(ids_t *, withdraw_done *);
 signals:
     void return_to_main();
+
 private slots:
     void timer_timeout();
     void on_Sulje_clicked();
@@ -29,9 +30,6 @@ private slots:
     void set_account_info(account_info_t info);
     void set_customer_info(customer_info_t);
     void update_balance(double);
-
-private:
-    void show_withdraw_done();
 
 private:
     Ui::withdraw *ui;
@@ -45,6 +43,7 @@ private:
     withdraw_done *p_withdraw_done;
     withdraw_error *p_error;
     QString name;
+    void show_withdraw_done();
 };
 
 #endif  // WITHDRAW_H
