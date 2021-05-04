@@ -29,14 +29,14 @@ private:
     // Auto generated
     Ui::Main_window *ui;
 
-    // Pointers:
+    // Pointers
     dll_rest_api *p_rest;
     dll_mobile_login *p_mobile;
     withdraw *p_withdraw;
     browse_transactions *p_browse;
     balance *p_balance;
     deposit_instructions *p_deposit_instruct;
-    QTimer *p_timer;    
+    QTimer *p_timer;
     withdraw_done *p_withdraw_done;
     ids_t *p_ids;
 
