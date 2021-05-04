@@ -61,7 +61,7 @@ browse_transactions::~browse_transactions() {
     delete p_rest;
 }
 void browse_transactions::reset_timer() {
-    time = 30;
+    time = 10;
     ui->time->setNum(time);
 }
 void browse_transactions::on_close_btn_clicked() {
@@ -82,8 +82,11 @@ void browse_transactions::on_log_out_btn_clicked() {
 void browse_transactions::transaction_menu(ids_t *ids, Main_window *main_wnd) {
     p_ids = ids;
     this->main_wnd = main_wnd;
-    time = 30;
+    time = 10;
     ui->time->setNum(time);
+    page = 0;
+    page_num = 1;
+    ui->back_btn->setEnabled(false);
 
     p_rest->get_customer_info(p_ids->customer_id);
     p_rest->get_account_info(p_ids->account_id);
@@ -96,7 +99,7 @@ void browse_transactions::transaction_menu(ids_t *ids, Main_window *main_wnd) {
 void browse_transactions::show_timer_reset() {
     this->show();
     p_timer->start(1000);
-    time = 30;
+    time = 10;
     ui->time->setNum(time);
 }
 
