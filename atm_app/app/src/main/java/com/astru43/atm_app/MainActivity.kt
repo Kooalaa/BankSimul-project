@@ -60,19 +60,20 @@ class MainActivity : AppCompatActivity() {
                     url += "/" + inputId.text.toString()
 
                     val request = JsonObjectRequest(Request.Method.GET, url, null, { response ->
-                        @SuppressLint("SetTextI18n")
-                        textView.text = "Response: %s".format(response)
+                        //@SuppressLint("SetTextI18n")
+                        //textView.text = "Response: %s".format(response)
 
                         val intent = Intent(this, AcceptLogin::class.java)
                             .putExtra("com.astru43.atm_app.ATM_TOKEN", inputId.text.toString())
                         startActivity(intent)
+                        inputId.text = Editable.Factory().newEditable("")
 
                     }, { error ->
                         if (error?.networkResponse?.statusCode == 404) {
                             try {
                                 val obj =
                                     JSONObject(error.networkResponse.data.toString(charset("utf-8")))
-                                textView.text = obj.getString("error")
+                                //textView.text = obj.getString("error")
                                 Toast.makeText(this, obj.getString("error"), Toast.LENGTH_SHORT)
                                     .show()
                                 Log.i("NotFound", error.networkResponse.statusCode.toString())

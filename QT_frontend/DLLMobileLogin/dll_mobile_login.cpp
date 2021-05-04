@@ -14,6 +14,7 @@ dll_mobile_login::dll_mobile_login(QObject *parent) : QObject(parent) {
     connect(p_network, &network_handler::got_mobile_token, this,
             &dll_mobile_login::got_mobile_token);
 
+    // Connect qr code disålay button signals to their appropriate functions
     connect(p_mobile_display, &QR_mobile_token::request_new_token, this,
             [this] { generate_new_mobile_token(ids.account_id); });
     connect(p_display, &QR_display::cancel_login, this,
@@ -35,16 +36,22 @@ void dll_mobile_login::login() {
 // network_handler calls:
 void dll_mobile_login::get_atm_token() { p_network->request_token(); }
 void dll_mobile_login::try_login(QString atm_token) { p_network->try_login(atm_token); }
-void dll_mobile_login::try_login() { p_network->try_login(atm_token); }
+void dll_mobile_login::try_login() {
+    if (atm_token == "null") return;
+    p_network->try_login(atm_token);
+}
 void dll_mobile_login::get_or_generate_mobile_token(int card_id) {
+    if (card_id == -1) return;
     p_network->request_mobile_token(card_id);
 }
 void dll_mobile_login::generate_new_mobile_token(int card_id) {
+    if (card_id == -1) return;
     p_network->request_new_mobile_token(card_id);
 }
 
-// Getters:
+// Getters and setters:
 ids_t dll_mobile_login::get_ids() const { return ids; }
+void dll_mobile_login::set_ids(const ids_t &value) { ids = value; }
 
 // Slots:
 void dll_mobile_login::got_token(QString atm_token) {

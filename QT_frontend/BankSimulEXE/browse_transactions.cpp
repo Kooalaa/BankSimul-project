@@ -67,7 +67,7 @@ void browse_transactions::reset_timer() {
 void browse_transactions::on_close_btn_clicked() {
     p_timer->stop();
     this->close();
-    main_wnd->show();
+    main_wnd->show_ui();
 
     p_ids = nullptr;
     main_wnd = nullptr;
@@ -113,4 +113,5 @@ void browse_transactions::on_back_btn_clicked() {
 
 void browse_transactions::on_pushButton_clicked() {
     qDebug() << this->width() << "x" << this->height();
+    graph_view = new graphical_transaction_view(*p_ids, this);
 }

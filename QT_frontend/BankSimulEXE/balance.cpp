@@ -26,7 +26,7 @@ balance::balance(QWidget *parent) : QDialog(parent), ui(new Ui::balance) {
             });
     connect(p_rest, qOverload<account_info_t>(&dll_rest_api::info_ready), this,
             [this](account_info_t info) {
-                ui->balance_label->setText(QString().setNum(info.balance));
+                ui->balance_label->setText(QString().setNum(info.balance, 'f', 2));
                 ui->account_num_label->setText(info.account_num);
             });
     connect(p_rest, qOverload<QVector<transaction_t>>(&dll_rest_api::info_ready), this,
@@ -42,7 +42,7 @@ balance::balance(QWidget *parent) : QDialog(parent), ui(new Ui::balance) {
                     QTableWidgetItem *date = new QTableWidgetItem(transactions[i].date);
                     QTableWidgetItem *time = new QTableWidgetItem(transactions[i].time);
                     QTableWidgetItem *sum =
-                        new QTableWidgetItem(QString().setNum(transactions[i].sum));
+                        new QTableWidgetItem(QString().setNum(transactions[i].sum, 'f', 2));
 
                     ui->transactions_view->setItem(i, 0, date);
                     ui->transactions_view->setItem(i, 1, time);
@@ -57,11 +57,12 @@ balance::~balance() {
     delete p_rest;
 }
 
-void balance::init_and_show(ids_t *ids, Main_window *main_wnd) {
+void balance::init_and_show(ids_t *ids, int64_t card_num, Main_window *main_wnd) {
     p_ids = ids;
     this->main_wnd = main_wnd;
     time = 30;
     ui->time->setNum(time);
+    ui->card_num_label->setText(QString().setNum(card_num));
 
     p_rest->get_customer_info(p_ids->customer_id);
     p_rest->get_account_info(p_ids->account_id);
@@ -73,7 +74,7 @@ void balance::init_and_show(ids_t *ids, Main_window *main_wnd) {
 void balance::on_close_btn_clicked() {
     p_timer->stop();
     this->close();
-    main_wnd->show();
+    main_wnd->show_ui();
 
     p_ids = nullptr;
     main_wnd = nullptr;
