@@ -1,3 +1,4 @@
+
 #include "deposit_instructions.h"
 
 #include "ui_deposit_instructions.h"
@@ -19,14 +20,16 @@ deposit_instructions::deposit_instructions(QWidget *parent)
 
 deposit_instructions::~deposit_instructions() { delete ui; }
 
-void deposit_instructions::on_start_clicked() {  // Shows the deposit.ui and starts timer on it
+// Shows the deposit.ui and starts timer on it
+void deposit_instructions::on_start_clicked() {
     p_deposit->show_ui(info.account_num, info.balance, name);
     stop_timer();
     this->hide();
 }
 
-void deposit_instructions::deposit_done() {  // Shows this.ui with new information and ends the
-                                             // deposit operation
+// Shows this.ui with new information and ends the deposit operation
+void deposit_instructions::deposit_done() {
+    status = 0;
     if (p_deposit->sum != 0.0f) {
         p_rest->add_transaction(p_id->account_id, p_deposit->sum);
         new_balance = p_deposit->sum + info.balance;
@@ -41,22 +44,31 @@ void deposit_instructions::deposit_done() {  // Shows this.ui with new informati
     this->show();
 }
 
-void deposit_instructions::timer() {  // Timer setup
+// Timer setup
+void deposit_instructions::timer() {
     ui->Time->setNum(time);
     time--;
-    if (time < 0) {
+    if ((time == 0) && (status == 0)) {
         stop_timer();
+        emit log_out();
+        this->close();
+    } else if ((time == 0) && (status == 1)) {
+        stop_timer();
+        emit return_to_main();
         this->close();
     }
 }
 
-void deposit_instructions::stop_timer() {  // Stops timer and resets timer integer
+// Stops timer and resets timer integer
+void deposit_instructions::stop_timer() {
     p_timer->stop();
     time = 10;
     ui->Time->setNum(time);
 }
 
-void deposit_instructions::reset(ids_t *id) {  // Resets the uis
+// Resets the uis
+void deposit_instructions::reset(ids_t *id) {
+    status = 1;
     p_id = id;
     p_timer->start(1000);
     p_deposit->reset_sum();
@@ -69,17 +81,21 @@ void deposit_instructions::reset(ids_t *id) {  // Resets the uis
     this->show();
 }
 
+// Closes deposit window and resets timer
 void deposit_instructions::on_Close_clicked() {
     stop_timer();
-    this->hide();
+    emit return_to_main();
+    this->close();
 }
 
+// Sets new account information on screen
 void deposit_instructions::set_account_info(account_info_t info) {
     this->info = info;
     ui->Bank_account_num->setText(info.account_num);
     ui->Balance->setText(QString().setNum(info.balance, 'f', 2));
 }
 
+// Sets new customer information on screen
 void deposit_instructions::set_customer_info(customer_info_t info) {
     name = info.first_name + " " + info.last_name;
     ui->User_name->setText(name);

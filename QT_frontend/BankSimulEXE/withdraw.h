@@ -20,6 +20,8 @@ public:
     explicit withdraw(QWidget *parent = nullptr);
     ~withdraw();
     void show_ui(ids_t *);
+signals:
+    void return_to_main();
 private slots:
     void timer_timeout();
     void on_Sulje_clicked();

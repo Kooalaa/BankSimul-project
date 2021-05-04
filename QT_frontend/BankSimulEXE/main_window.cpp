@@ -12,12 +12,18 @@ Main_window::Main_window(QWidget *parent) : QDialog(parent), ui(new Ui::Main_win
     p_balance = new balance();
     p_rest = new dll_rest_api();
     p_ids = new ids_t;
+    p_withdraw_done = new withdraw_done();
 
     connect(p_timer, SIGNAL(timeout()), this, SLOT(timer()));
     connect(p_rest, SIGNAL(info_ready(account_info_t)), this,
             SLOT(set_account_info(account_info_t)));
     connect(p_rest, SIGNAL(info_ready(customer_info_t)), this,
             SLOT(set_customer_info(customer_info_t)));
+    connect(p_deposit_instruct, SIGNAL(log_out()), this, SLOT(on_Log_out_btn_clicked()));
+    connect(p_deposit_instruct, SIGNAL(return_to_main()), this, SLOT(return_to_main_slot()));
+    connect(p_withdraw, SIGNAL(return_to_main()), this, SLOT(return_to_main_slot()));
+    connect(p_withdraw_done, SIGNAL(return_to_main()), this, SLOT(return_to_main_slot()));
+    connect(p_withdraw_done, SIGNAL(log_out()), this, SLOT(on_Log_out_btn_clicked()));
 }
 
 Main_window::~Main_window() {
@@ -57,6 +63,7 @@ void Main_window::on_Browse_transactions_btn_clicked() {
 void Main_window::on_Deposit_btn_clicked() {
     stop_timer();
     p_deposit_instruct->reset(p_ids);
+    this->hide();
 }
 
 void Main_window::on_Show_balance_btn_clicked() {
@@ -69,19 +76,16 @@ void Main_window::on_Show_balance_btn_clicked() {
 void Main_window::on_Withdraw_btn_clicked() {
     stop_timer();
     p_withdraw->show_ui(p_ids);
+    this->hide();
 }
 
 void Main_window::timer() {
     ui->time->setNum(time);
     time--;
-    if (time < 0) {
+    if (time == 0) {
         stop_timer();
+        emit logout();
     }
-}
-
-void Main_window::show_with_timer() {
-    p_timer->start(1000);
-    this->show();
 }
 
 void Main_window::set_account_info(account_info_t info) {
@@ -94,10 +98,15 @@ void Main_window::set_customer_info(customer_info_t info) {
     ui->user_name->setText(name);
 }
 
+void Main_window::return_to_main_slot() { show_ui(); }
+
 void Main_window::stop_timer() {
     p_timer->stop();
     time = 30;
     ui->time->setNum(time);
 }
 
-void Main_window::on_Log_out_btn_clicked() { emit logout(); }
+void Main_window::on_Log_out_btn_clicked() {
+    stop_timer();
+    emit logout();
+}

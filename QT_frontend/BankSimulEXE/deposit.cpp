@@ -15,6 +15,8 @@ deposit::~deposit() { delete ui; }
 
 void deposit::reset_sum() { ui->lineEdit->setText(""); }
 
+// Gets account information as parameters and sets them on screen, starts timer and shows this
+// window
 void deposit::show_ui(QString account_num, double balance, QString name) {
     p_timer->start(1000);
     ui->Balance->setText(QString().setNum(balance, 'f', 2));
@@ -23,6 +25,7 @@ void deposit::show_ui(QString account_num, double balance, QString name) {
     this->show();
 }
 
+// Timer setup
 void deposit::timer() {
     ui->Time->setNum(time);
     time--;
@@ -32,6 +35,8 @@ void deposit::timer() {
     }
 }
 
+// Num_pad buttongroups button handling, gets called everytime a button from num_pad buttongroup is
+// pressed
 void deposit::handle_buttons(QAbstractButton *button) {
     stop_timer();
     QString temp = ui->lineEdit->text();
@@ -45,21 +50,26 @@ void deposit::handle_buttons(QAbstractButton *button) {
     p_timer->start();
 }
 
+// Backspace button
 void deposit::on_pushButton_12_clicked() {
     ui->lineEdit->backspace();
     stop_timer();
     p_timer->start();
 }
 
+// Stops the timer
 void deposit::stop_timer() {
     p_timer->stop();
     time = 10;
     ui->Time->setNum(time);
 }
 
+// Signals the program that deposit sum has been selected, resets timer and closes this window
 void deposit::on_Ok_clicked() {
     stop_timer();
     sum = ui->lineEdit->text().toDouble();
     emit ready();
     this->close();
 }
+
+// Main window for deposit operation, In this window user can input wanted deposit amount

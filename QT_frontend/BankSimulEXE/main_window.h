@@ -9,6 +9,7 @@
 #include "browse_transactions.h"
 #include "deposit_instructions.h"
 #include "withdraw.h"
+#include "withdraw_done.h"
 namespace Ui {
 class Main_window;
 }
@@ -32,6 +33,7 @@ private:
     ids_t *p_ids;
     QTimer *p_timer;
     dll_rest_api *p_rest;
+    withdraw_done *p_withdraw_done;
     void stop_timer();
     int time = 30;
     QString name;
@@ -47,9 +49,9 @@ private slots:
     void on_Withdraw_btn_clicked();
     void on_Log_out_btn_clicked();
     void timer();
-    void show_with_timer();
     void set_account_info(account_info_t);
     void set_customer_info(customer_info_t);
+    void return_to_main_slot();
 };
 
 #endif  // MAIN_WINDOW_H

@@ -20,6 +20,7 @@ public:
     void reset(ids_t *);
 signals:
     void log_out();
+    void return_to_main();
 private slots:
     void on_start_clicked();
     void deposit_done();
@@ -39,6 +40,7 @@ private:
     int time = 10;
     double new_balance;
     void stop_timer();
+    int status;
 };
 
 #endif  // DEPOSIT_INSTRUCTIONS_H
