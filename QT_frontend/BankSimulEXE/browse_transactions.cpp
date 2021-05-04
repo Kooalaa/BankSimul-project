@@ -67,7 +67,7 @@ void browse_transactions::reset_timer() {
 void browse_transactions::on_close_btn_clicked() {
     p_timer->stop();
     this->close();
-    main_wnd->show();
+    main_wnd->show_ui();
 
     p_ids = nullptr;
     main_wnd = nullptr;

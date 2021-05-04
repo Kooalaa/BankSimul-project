@@ -6,7 +6,7 @@
 #include <QObject>
 #include <QtNetwork>
 
-#include "../DLLRestAPI/ids_t.h"
+#include "ids_t.h"
 
 class network_handler : public QObject {
     Q_OBJECT
