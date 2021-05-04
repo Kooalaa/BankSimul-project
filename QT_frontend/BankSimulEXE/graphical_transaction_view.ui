@@ -71,6 +71,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="transactions_btn">
+       <property name="text">
+        <string>Tilitapahtumat</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="close_btn">
        <property name="font">
         <font>

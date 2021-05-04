@@ -93,6 +93,13 @@ void browse_transactions::transaction_menu(ids_t *ids, Main_window *main_wnd) {
     this->show();
 }
 
+void browse_transactions::show_timer_reset() {
+    this->show();
+    p_timer->start(1000);
+    time = 30;
+    ui->time->setNum(time);
+}
+
 void browse_transactions::on_forward_btn_clicked() {
     reset_timer();
     page_num++;
@@ -112,7 +119,6 @@ void browse_transactions::on_back_btn_clicked() {
 }
 
 void browse_transactions::on_pushButton_clicked() {
-    qDebug() << this->width() << "x" << this->height();
-    graph_view = new graphical_transaction_view(*p_ids, this);
+    graph_view = new graphical_transaction_view(*p_ids, main_wnd, this);
     p_timer->stop();
 }
