@@ -43,16 +43,15 @@ private:
     Main_window *p_main_window;
     browse_transactions *p_browse;
     QTimer *p_timer;
-    ids_t *p_ids;
 
     // Variables
     ids_t ids;
-    int pages;
-    int page;
     QVector<transaction_t> data;
-    void data_ready();
     int time;
     int year = QDate::currentDate().year();
+
+    // Funktio
+    void data_ready();
 
 private slots:
     void got_transactions(QVector<transaction_t> transactions);

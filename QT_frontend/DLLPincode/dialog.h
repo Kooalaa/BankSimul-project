@@ -21,6 +21,7 @@ public:
     void show_with_timer();
 signals:
     void send_pin(QByteArray);
+    void cancel();
 
 private slots:
     void on_OK_clicked();
