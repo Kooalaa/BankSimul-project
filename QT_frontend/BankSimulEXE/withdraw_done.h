@@ -17,6 +17,9 @@ public:
 private slots:
     void on_pushButton_clicked();
     void timer();
+signals:
+    void log_out();
+    void return_to_main();
 
 private:
     Ui::withdraw_done *ui;

@@ -48,8 +48,9 @@ void withdraw::show_ui(ids_t *id) {
 void withdraw::timer_timeout() {
     ui->time->setNum(time_int);
     time_int--;
-    if (time_int < 0) {
+    if (time_int == 0) {
         stop_timer();
+        emit return_to_main();
         this->close();
     }
 }
@@ -105,7 +106,9 @@ void withdraw::show_withdraw_done() {
     this->close();
 }
 
+// Closes withdraw window and resets timer
 void withdraw::on_Sulje_clicked() {
     stop_timer();
+    emit return_to_main();
     this->close();
 }
