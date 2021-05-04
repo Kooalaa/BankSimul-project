@@ -33,6 +33,7 @@ public:
     void add_transaction(int account_id, double sum);
     void set_new_balance(int account_id, double sum);
     void get_transactions_pages(int account_id);
+    void get_transaction_year(int account_id, int year);
 
 private:
     engine_class *p_engine;

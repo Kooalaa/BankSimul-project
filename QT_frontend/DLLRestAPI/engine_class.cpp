@@ -134,6 +134,18 @@ void engine_class::transaction_amount(int account_id) {
     });
 }
 
+void engine_class::get_transaction_year(int account_id, int year) {
+    QString site_url = site_base_url + "/actions/year/" + QString().setNum(account_id) + "/" +
+                       QString().setNum(year);
+
+    QNetworkRequest request(site_url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QNetworkReply *reply = p_manager->get(request);
+
+    connect(reply, &QNetworkReply::finished, this, &engine_class::transactions_response);
+}
+
 // Receives the request response for login data.
 void engine_class::login_response() {
     QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
