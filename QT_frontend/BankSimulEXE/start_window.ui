@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
-    <height>338</height>
+    <width>253</width>
+    <height>185</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -116,7 +116,7 @@
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="frameShape">
-         <enum>QFrame::Box</enum>
+         <enum>QFrame::NoFrame</enum>
         </property>
         <property name="text">
          <string>tai
@@ -193,7 +193,7 @@ kirjautuminen</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>450</width>
+     <width>253</width>
      <height>20</height>
     </rect>
    </property>

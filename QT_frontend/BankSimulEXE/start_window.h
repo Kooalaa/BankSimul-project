@@ -33,7 +33,6 @@ private:
     dll_mobile_login *p_mobile;
     long long card_num;
 
-
 private slots:
     void logged_in(ids_t ids);
     void pin_received(QByteArray hash);
@@ -43,7 +42,6 @@ private slots:
 
     // Mobile login slots:
     void logged_in(ids_t ids, int64_t card_num);
-    void cancel_login();
     void on_mobile_btn_clicked();
 };
 #endif  // START_WINDOW_H
