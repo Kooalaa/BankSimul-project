@@ -5,7 +5,11 @@ const { randomBytes } = require('crypto');
 const base64url = require('base64url');
 const { Subject } = require('rxjs');
 
-
+/**
+ * MySql error codes
+ * 
+ * @constant error
+ */
 const error = {
     ER_DUP_ENTRY: 1062
 };
@@ -110,7 +114,9 @@ router.get('/login/:atm_token', (req, res) => {
                 const subscription = status.subscribe({
                     next: (atm_token) => {
                         console.log(atm_token);
+                        //Check witch token should react to this.
                         if (atm_token.token != req.params.atm_token) return;
+                        //Check if this is cancel request.
                         else if (atm_token.status == "CANCEL") {
                             res.json(ret);
                             subscription.unsubscribe();
@@ -156,17 +162,8 @@ router.get('/login/:atm_token', (req, res) => {
 });
 
 /**
- * 
+ * Mobile response to login request.
  */
-router.get('/:atm_token', (req, res) => {
-    mobile.get_status(req.params.atm_token,
-        (err, db_result) => {
-            if (err) res.json(err);
-            else res.json(db_result[0]);
-        }
-    );
-});
-
 router.post('/mobile', (req, res) => {
     console.log(req.body);
     mobile.get_card_id(req.body.mobile_identification,
@@ -188,6 +185,10 @@ router.post('/mobile', (req, res) => {
     );
 });
 
+/**
+ * Login cancel request.
+ * Cancels the pending login request for the given tokne
+ */
 router.delete('/cancel/:atm_token', (req, res) => {
     console.log(req.params);
     mobile.remove_atm(req.params.atm_token,
@@ -204,6 +205,9 @@ router.delete('/cancel/:atm_token', (req, res) => {
     );
 });
 
+/**
+ * Removes mobile identification token from the given account
+ */
 router.delete('/:card_id', (req, res) => {
     mobile.delete_identification(req.params.card_id,
         (err, db_result) => {

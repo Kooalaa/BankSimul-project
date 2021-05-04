@@ -59,7 +59,7 @@ module.exports.mobile = {
     },
 
     login: (card_id, callback) => {
-        db.query(
+        return db.query(
             'select id, Asiakas_id, Tili_id, Kortinnumero from Kortti where id=?',
             [card_id],
             callback
