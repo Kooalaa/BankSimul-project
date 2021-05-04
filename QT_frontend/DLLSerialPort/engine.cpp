@@ -11,7 +11,7 @@ Engine::~Engine() {
 }
 
 void Engine::read_RFID_tag() {
-    p_serial_port->setPortName("COM3");
+    p_serial_port->setPortName("COM6");
     qDebug() << p_serial_port->portName();
     p_serial_port->setBaudRate(9600);
     p_serial_port->setDataBits(QSerialPort::Data8);

@@ -42,7 +42,7 @@ start_window::~start_window() {
 }
 
 void start_window::logged_in(ids_t ids) {
-    p_main_window->set_card_num(0);
+    p_main_window->set_card_num(card_num);
     p_main_window->set_ids(ids);
     p_main_window->show_ui();
 }

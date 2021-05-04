@@ -60,7 +60,7 @@ balance::~balance() {
 void balance::init_and_show(ids_t *ids, int64_t card_num, Main_window *main_wnd) {
     p_ids = ids;
     this->main_wnd = main_wnd;
-    time = 30;
+    time = 10;
     ui->time->setNum(time);
     ui->card_num_label->setText(QString().setNum(card_num));
 
