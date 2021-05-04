@@ -118,12 +118,13 @@ void graphical_transaction_view::on_close_btn_clicked() {
 
 void graphical_transaction_view::on_previous_year_btn_clicked() {
     year--;
-    data_ready();
+    p_rest_api->get_transaction_year(ids.account_id, year);
+    qDebug() << this->width() << "x" << this->height();
 }
 
 void graphical_transaction_view::on_next_year_btn_clicked() {
     year++;
-    data_ready();
+    p_rest_api->get_transaction_year(ids.account_id, year);
 }
 
 /*
