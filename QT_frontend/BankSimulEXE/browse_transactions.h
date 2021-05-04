@@ -1,9 +1,10 @@
 #ifndef BROWSE_TRANSACTIONS_H
 #define BROWSE_TRANSACTIONS_H
-
 #include <dll_rest_api.h>
 
 #include <QDialog>
+
+#include "graphical_transaction_view.h"
 
 namespace Ui {
 class browse_transactions;
@@ -16,20 +17,14 @@ class browse_transactions : public QDialog {
 public:
     explicit browse_transactions(QWidget *parent = nullptr);
     ~browse_transactions();
-    // void init_and_show(ids_t *ids, Main_window *main_wnd);
-    // void show_ui(ids_t *);
     void transaction_menu(ids_t *ids, Main_window *main_wnd);
+
 private slots:
     void on_close_btn_clicked();
-
     void on_log_out_btn_clicked();
-
     void on_forward_btn_clicked();
-
     void on_back_btn_clicked();
-
     void reset_timer();
-
     void on_pushButton_clicked();
 
 private:
@@ -42,6 +37,7 @@ private:
     int page = 0;
     int page_num;
     int pages;
+    graphical_transaction_view *graph_view;
 };
 
 #endif  // BROWSE_TRANSACTIONS_H
