@@ -30,6 +30,7 @@ public:
     void add_transaction(int account_id, double sum);
     void edit_balance(int account_id, double new_balance);
     void transaction_amount(int account_id);
+    void get_transaction_year(int account_id, int year);
 
 private:
     QNetworkAccessManager *p_manager;

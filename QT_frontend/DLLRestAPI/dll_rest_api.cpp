@@ -44,6 +44,10 @@ void dll_rest_api::get_transactions_pages(int account_id) {
     p_engine->transaction_amount(account_id);
 }
 
+void dll_rest_api::get_transaction_year(int account_id, int year) {
+    p_engine->get_transaction_year(account_id, year);
+}
+
 void dll_rest_api::read_result(int status, int attempts, ids_t ids) {
     switch (status) {
         case -1:

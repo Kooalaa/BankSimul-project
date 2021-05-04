@@ -27,7 +27,7 @@ graphical_transaction_view::graphical_transaction_view(ids_t ids,
             &graphical_transaction_view::got_page_nums);
     connect(p_rest_api, qOverload<QVector<transaction_t>>(&dll_rest_api::info_ready), this,
             &graphical_transaction_view::got_transactions);
-    p_rest_api->get_transactions_pages(ids.account_id);
+    p_rest_api->get_transaction_year(ids.account_id, QDate::currentDate().year());
 
     p_chart = new QChart;
     p_chart_view = new QChartView(p_chart);
@@ -104,10 +104,10 @@ void graphical_transaction_view::got_transactions(QVector<transaction_t> transac
         qDebug() << transaction.sum;
         data.append(transaction);
     }
-    if (page <= pages - 1)
+    /*if (page <= pages - 1)
         p_rest_api->get_transactions(ids.account_id, page++);
-    else
-        data_ready();
+    else*/
+    data_ready();
 }
 
 void graphical_transaction_view::on_close_btn_clicked() {
