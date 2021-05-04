@@ -34,7 +34,8 @@ void Dialog::Timer_slot() {
     ui->label->setNum(time);
     time--;
     if (time < 0) {
-        this->close();
+        stop_timer();
+        emit cancel();
     }
 }
 
@@ -61,7 +62,7 @@ void Dialog::Handle_Buttons(QAbstractButton *button) {
 
 void Dialog::on_Close_clicked() {
     stop_timer();
-    this->close();
+    emit cancel();
 }
 
 void Dialog::on_Backspace_clicked() {

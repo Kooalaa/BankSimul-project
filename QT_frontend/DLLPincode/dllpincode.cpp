@@ -6,6 +6,7 @@ DLLPincode::DLLPincode(QObject *parent) : QObject(parent) {
     p_dialog = new Dialog();
     connect(p_dialog, SIGNAL(send_pin(QByteArray)), this, SLOT(get_pin(QByteArray)));
     connect(p_error_dialog, SIGNAL(log_out()), this, SLOT(log_out()));
+    connect(p_dialog, &Dialog::cancel, this, &DLLPincode::log_out);
 }
 
 // Deleting pointers and making them nullpointers
