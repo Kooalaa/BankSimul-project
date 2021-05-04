@@ -114,4 +114,5 @@ void browse_transactions::on_back_btn_clicked() {
 void browse_transactions::on_pushButton_clicked() {
     qDebug() << this->width() << "x" << this->height();
     graph_view = new graphical_transaction_view(*p_ids, this);
+    p_timer->stop();
 }

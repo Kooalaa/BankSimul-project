@@ -83,14 +83,14 @@ void graphical_transaction_view::data_ready() {
     double min = *std::min_element(months.constBegin(), months.constEnd());
     double max = *std::max_element(months.constBegin(), months.constEnd());
     qDebug() << min << max;
-    p_axis_y->setRange(std::floor(max == 0 ? min : -max), std::ceil(max == 0 ? -min : max));
+    p_axis_y->setRange(std::floor(max < -min ? min : -max), std::ceil(max < -min ? -min : max));
     p_bar_series->attachAxis(p_axis_x);
     p_bar_series->attachAxis(p_axis_y);
 
     this->show();
     ui->timer_label->setNum(time = 10);
     p_timer->start(1000);
-    p_browse->hide();
+    p_browse->close();
 }
 
 void graphical_transaction_view::got_page_nums(int pages) {
